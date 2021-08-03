@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'userapp',
     'driverapp',
     'adminapp',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [

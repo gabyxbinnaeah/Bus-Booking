@@ -1,0 +1,14 @@
+{% extends 'driver/base.html'%}
+
+{% block content %}
+<div class="container">
+    <h1>Booking</h1>
+    {{block.super}}
+    <div class="col-sm-4">
+    {% for driver in drivers %}
+{{driver.name}}
+{{driver.email}}
+</div>
+</div>
+{% endfor %}
+{%endblock%}

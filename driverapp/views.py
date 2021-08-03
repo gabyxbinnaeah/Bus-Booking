@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from .models import Driver, Bus, Book
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    drivers = Driver.objects.all()
+    return render(request, 'driver/index.html',{"drivers":drivers})
+
+
