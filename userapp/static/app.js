@@ -1,118 +1,72 @@
-/*global $, document, window, setTimeout, navigator, console, location*/
+const container = document.querySelector('.container');
+const seats = document.querySelectorAll('.row .seat:not(.occupied)');
+const count = document.getElementById('count');
+const total = document.getElementById('total');
+const busSelect = document.getElementById('bus');
 
+populateUI();
 
+let ticketPrice = +busSelect.value;
 
-$(document).ready(function () {
+// Save selected bus index and price
+function setBusData(busIndex, busPrice) {
+  localStorage.setItem('selectedBusIndex', busIndex);
+  localStorage.setItem('selectedBusPrice', busPrice);
+}
 
-    'use strict';
+// Update total and count
+function updateSelectedCount() {
+  const selectedSeats = document.querySelectorAll('.row .seat.selected');
 
-    var usernameError = true,
-        emailError    = true,
-        passwordError = true,
-        passConfirm   = true;
+  const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat));
 
-    // Detect browser for css purpose
-    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-        $('.form form label').addClass('fontSwitch');
-    }
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
 
-    // Label effect
-    $('input').focus(function () {
+  const selectedSeatsCount = selectedSeats.length;
 
-        $(this).siblings('label').addClass('active');
+  count.innerText = selectedSeatsCount;
+  total.innerText = selectedSeatsCount * ticketPrice;
+  
+  setBusData(busSelect.selectedIndex, busSelect.value);
+}
+
+// Get data from localstorage and populate UI
+function populateUI() {
+  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
+  if (selectedSeats !== null && selectedSeats.length > 0) {
+    seats.forEach((seat, index) => {
+      if (selectedSeats.indexOf(index) > -1) {
+        seat.classList.add('selected');
+      }
     });
+  }
 
-    // Form validation
-    $('input').blur(function () {
+  const selectedBusIndex = localStorage.getItem('selectedBusIndex');
 
-        // User Name
-        if ($(this).hasClass('name')) {
-            if ($(this).val().length === 0) {
-                $(this).siblings('span.error').text('Please type your full name').fadeIn().parent('.form-group').addClass('hasError');
-                usernameError = true;
-            } else if ($(this).val().length > 1 && $(this).val().length <= 6) {
-                $(this).siblings('span.error').text('Please type at least 6 characters').fadeIn().parent('.form-group').addClass('hasError');
-                usernameError = true;
-            } else {
-                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-                usernameError = false;
-            }
-        }
-        // Email
-        if ($(this).hasClass('email')) {
-            if ($(this).val().length == '') {
-                $(this).siblings('span.error').text('Please type your email address').fadeIn().parent('.form-group').addClass('hasError');
-                emailError = true;
-            } else {
-                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-                emailError = false;
-            }
-        }
+  if (selectedBusIndex !== null) {
+    busSelect.selectedIndex = selectedBusIndex;
+  }
+}
 
-        // PassWord
-        if ($(this).hasClass('pass')) {
-            if ($(this).val().length < 8) {
-                $(this).siblings('span.error').text('Please type at least 8 charcters').fadeIn().parent('.form-group').addClass('hasError');
-                passwordError = true;
-            } else {
-                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-                passwordError = false;
-            }
-        }
-
-        // PassWord confirmation
-        if ($('.pass').val() !== $('.passConfirm').val()) {
-            $('.passConfirm').siblings('.error').text('Passwords don\'t match').fadeIn().parent('.form-group').addClass('hasError');
-            passConfirm = false;
-        } else {
-            $('.passConfirm').siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-            passConfirm = false;
-        }
-
-        // label effect
-        if ($(this).val().length > 0) {
-            $(this).siblings('label').addClass('active');
-        } else {
-            $(this).siblings('label').removeClass('active');
-        }
-    });
-
-
-    // form switch
-    $('a.switch').click(function (e) {
-        $(this).toggleClass('active');
-        e.preventDefault();
-
-        if ($('a.switch').hasClass('active')) {
-            $(this).parents('.form-peice').addClass('switched').siblings('.form-peice').removeClass('switched');
-        } else {
-            $(this).parents('.form-peice').removeClass('switched').siblings('.form-peice').addClass('switched');
-        }
-    });
-
-
-    // Form submit
-    $('form.signup-form').submit(function (event) {
-        event.preventDefault();
-
-        if (usernameError == true || emailError == true || passwordError == true || passConfirm == true) {
-            $('.name, .email, .pass, .passConfirm').blur();
-        } else {
-            $('.signup, .login').addClass('switched');
-
-            setTimeout(function () { $('.signup, .login').hide(); }, 700);
-            setTimeout(function () { $('.brand').addClass('active'); }, 300);
-            setTimeout(function () { $('.heading').addClass('active'); }, 600);
-            setTimeout(function () { $('.success-msg p').addClass('active'); }, 900);
-            setTimeout(function () { $('.success-msg a').addClass('active'); }, 1050);
-            setTimeout(function () { $('.form').hide(); }, 700);
-        }
-    });
-
-    // Reload page
-    $('a.profile').on('click', function () {
-        location.reload(true);
-    });
-
-
+// Bus select event
+busSelect.addEventListener('change', e => {
+  ticketPrice = +e.target.value;
+  setBusData(e.target.selectedIndex, e.target.value);
+  updateSelectedCount();
 });
+
+// Seat click event
+container.addEventListener('click', e => {
+  if (
+    e.target.classList.contains('seat') &&
+    !e.target.classList.contains('occupied')
+  ) {
+    e.target.classList.toggle('selected');
+
+    updateSelectedCount();
+  }
+});
+
+// Initial count and total set
+updateSelectedCount();
