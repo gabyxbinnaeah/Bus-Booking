@@ -1,5 +1,15 @@
 from django.shortcuts import render
+from .forms import BusForm
 
-# Create your views here.
+
 def index(request):
-    return render(request, 'index.html')
+    if request.method == 'POST':
+        form=BusForm(request.POST,request.FILES)
+        if form.is_valid():
+            bus=form.save(commit=False)
+            bus.save()
+    
+            return HttpResponseRedirect(request.path_info)
+    else:
+        form = BusForm()
+    return render(request, 'main/index.html',{'form':form}) 
