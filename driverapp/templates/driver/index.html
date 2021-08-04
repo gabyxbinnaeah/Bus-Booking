@@ -1,0 +1,16 @@
+{% extends 'driver/base.html'%}
+
+{% block content %}
+<div class="container">
+  <h1 style="text-align: center;">Booking</h1>
+{{block.super}}
+<div class="row">
+    {% for driver in drivers %}
+    {{driver.name}}
+    {{driver.email}}
+    {{driver.contact}}
+
+</div>
+</div>
+{%endfor%}
+{%endblock%}
