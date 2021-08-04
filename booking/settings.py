@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from pathlib import Path
+import os
+import django_heroku
+import dj_database_url
+from pathlib import Path
+from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p%&vg2qihj12-dir438el2mkxla1vk!am128t#e4$_#wst@+h('
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,9 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'userapp',
-    'driverapp',
-    'adminapp',
+    'userapp.apps.UserappConfig',
+    'driverapp.apps.DriverappConfig',
+    'adminapp.apps.AdminappConfig',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -77,12 +82,34 @@ WSGI_APPLICATION = 'booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+MODE=config('MODE',default='dev')
+SECRET_KEY=config('SECRET_KEY')
+DEBUG=config('DEBUG',default=False,cast=bool)
+# development
+if config('MODE')=='dev':
+    DATABASES ={
+        'default':{
+            'ENGINE':'django.db.backends.postgresql_psycopg2',
+            'NAME':config('DB_NAME'),
+            'USER':config('DB_USER'),
+            'PASSWORD':config('DB_PASSWORD'),
+            'HOST':config('DB_HOST'),
+            'PORT':''
+        }
     }
-}
+# production
+else:
+    DATABASES={
+        'default':dj_database_url.config(
+            default=config('DATABASE_URL'))
+    }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS',cast=Csv())
+ALLOWED_HOSTS='.localhost', '.herokuapp.com', '.127.0.0.1'
 
 
 # Password validation
@@ -128,3 +155,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTH_USER_MODEL='adminapp.User'
