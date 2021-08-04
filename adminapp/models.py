@@ -19,6 +19,13 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+    
+
+    @classmethod
+    def bus_details(cls):
+        bus_details_list=cls.objects.all()
+        return bus_details_list 
+
 
     def __str__(self):
         return self.bus_name
