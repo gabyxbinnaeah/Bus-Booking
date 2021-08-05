@@ -1,4 +1,6 @@
 from django.db import models
+from adminapp.models import Admin
+
 
 # Create your models here.
 class Driver(models.Model):
@@ -34,6 +36,11 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+    admin = models.ForeignKey(Admin,on_delete=models.CASCADE)
+    
+
+    def __str__(self):
+        return self.bus_name
 
     def __str__(self):
         return self.bus_name
