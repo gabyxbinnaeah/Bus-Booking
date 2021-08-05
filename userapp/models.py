@@ -2,7 +2,10 @@ from django.db import models
 from adminapp.models import Admin
 from driverapp.models import Bus
 
+<<<<<<< HEAD
+=======
 # Create your models here.
+>>>>>>> origin/development
 class User(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
