@@ -17,10 +17,13 @@ class Bus(models.Model):
     rem = models.CharField(null=True, max_length=5)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
-    time = models.TimeField()
 
     def __str__(self):
         return self.bus_name
+    
+    @classmethod
+    def search_buses(cls, source, dest):
+        return cls.objects.filter(source__icontains=source , dest__icontains=dest).all()
 
 
 
