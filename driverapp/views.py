@@ -8,24 +8,21 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 
 # Create your views here.
-@login_required
-def index(request):
+# @login_required
+def dashboard(request):
     drivers = Driver.objects.all()
     bus = Bus.objects.all()
-    if not request.user.is_authenticated:
-        return render(request, 'registration/login.html')
-    else:
-        return render(request, 'driver/index.html',{"drivers":drivers, "bus":bus})
+    # if not request.user.is_authenticated:
+    #     return render(request, 'registration/login.html')
+    # else:
+    return render(request, 'driver/dashboard.html',{"drivers":drivers, "bus":bus})
 
-# def login(request):
-#     return render(request, 'registration/login.html')
-
-
+@login_required
 def delete_bus(request):
     bu_id = request.POST['id']
     bus = Bus.objects.get(id = bu_id)
     bus.delete()
-    return render(request, 'driver/index.html' )
+    return render(request, 'driver/dashboard.html',{"bus":bus} )
     # return HttpResponseRedirect('/driverapp/manage_busees/')
 
 def customer(request):
@@ -54,7 +51,7 @@ def registeruser(request):
 def loginpage(request):
     if request.user.is_authenticated:
 
-            return redirect('index')
+            return redirect('dashboard')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -71,22 +68,10 @@ def loginpage(request):
       
     return render(request,'registration/login.html')
 
-def dashboard(request):
-    return render(request, 'driver/dashboard.html')
-# def bus(request):
-#     bus = Bus.objects.all()
-#     return render(request, 'driver/index.html',{"bus":bus})
+# def dashboard(request):
+#     return render(request, 'driver/dashboard.html')
 
-# def registration(request):
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             form.save()
-#             return redirect('login')
-#     else:
-#         form = RegisterForm()
-#     context = {
-#         'form':form,
-#     }
-#     return render(request, 'registration/register.html', context)
+
+def add_bus(request):
+    bus = Bus.objects.all()
+    return render(request, 'driver/bus_added.html')
