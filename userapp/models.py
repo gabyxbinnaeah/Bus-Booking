@@ -1,5 +1,5 @@
 from django.db import models
-from adminapp.models import Admin
+from adminapp.models import Admin,User
 from driverapp.models import Bus
 
 # Create your models here.
@@ -11,10 +11,10 @@ class Book(models.Model):
                        (CANCELLED, 'Cancelled'),)
     email = models.EmailField()
     name = models.CharField(max_length=30)
-    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
-    bus_id =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
-    # user = models.ForeignKey(User,on_delete=models.CASCADE)
-    source = models.CharField(max_length=30)
+    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, )
+    bus_id =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE,)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True )
+    phone_number = models.IntegerField()
     dest = models.CharField(max_length=30,null=True ,blank=True)
     seat_no = models.CharField(max_length=30,null=True)
     fare = models.CharField(null=True, max_length=6)

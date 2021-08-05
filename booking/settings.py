@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'userapp.apps.UserappConfig',
     'driverapp.apps.DriverappConfig',
     'adminapp.apps.AdminappConfig',
-    'bootstrap4'
+    'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -155,4 +156,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL='adminapp.User'
+AUTH_USER_MODEL='adminapp.User'
