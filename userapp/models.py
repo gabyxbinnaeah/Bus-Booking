@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 # from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -20,14 +19,11 @@ from django.contrib.auth.models import User
 #     REQUEST_FIELD=['username', 'email', 'password']
 #     def __str__(self):
 #         return self.email  
-=======
+
 from adminapp.models import Admin
 from driverapp.models import Bus
 
-<<<<<<< HEAD
-=======
 # Create your models here.
->>>>>>> origin/development
 class User(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
@@ -35,7 +31,6 @@ class User(models.Model):
     
     def __str__(self):
         return self.email  
->>>>>>> origin/development
 
 
 class Bus(models.Model):
