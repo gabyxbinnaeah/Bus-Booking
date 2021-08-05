@@ -1,0 +1,37 @@
+{% extends 'driver/base.html'%}
+
+{% block content %}
+<div class="container">
+    <h1>Booking</h1>
+    {{block.super}}
+    <div class="col-sm-4">
+    {% for driver in drivers %}
+{{driver.name}}
+{{driver.email}}
+</div>
+<h4 class="" style="padding-top:50">Available buses</h4>
+<div style="padding:50">
+    <table class="">
+        {% for bus in bus %}
+        <tr>
+            <td style="padding:10;">Name : {{bus.bus_name}}</td>
+            <td style="padding:10;">source : {{bus.source}}</td>
+            <td style="padding:10;">Dest : {{bus.dest}}</td>
+            <td style="padding:10;">Nos : {{bus.nos}}</td>
+            <td style="padding:10;">fare : {{bus.fare}}
+            <td style="padding:10;">date : {{bus.date}}
+            <td style="padding:10;">time : {{bus.time}}
+            <td style="padding:10;">
+                <form action="/driver/delete/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{bus.id}}">
+                    <input class="" type="submit" value="Remove">
+                    <input class="" type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+</div>
+</div>
+{% endfor %}
+{%endblock%}

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import BusForm
-
+from django.http import HttpResponseRedirect
 
 def index(request):
     if request.method == 'POST':
