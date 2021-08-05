@@ -15,4 +15,4 @@ class CreateUserForm(UserCreationForm):
 class BookForm(forms.ModelForm):
     class Meta:
         model=Book
-        fields=['email','source','dest','date','time']
+        fields=['busid','source','dest','date']

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'driverapp',
     'adminapp',
     'bootstrap4',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -164,7 +165,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
+# config/settings.py
+LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = 'loginpage'
 
 STATICFILES_DIRS = [
      os.path.join(BASE_DIR, "static"),

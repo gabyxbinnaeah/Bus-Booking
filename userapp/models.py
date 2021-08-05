@@ -5,9 +5,14 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+class BusCategory(models.Model):
+    name = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
 
 class Bus(models.Model):
+    bus_category = models.ForeignKey(BusCategory,on_delete=models.CASCADE,default='')
     bus_name = models.CharField(max_length=30)
     source = models.CharField(max_length=30)
     dest = models.CharField(max_length=30)
