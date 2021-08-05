@@ -8,6 +8,13 @@ from driverapp.models import Bus
 
 def index(request):
     buses = Bus.objects.all()
+    return render(request, 'index.html')
+
+def seats(request):
+    return render(request, 'seats.html')
+
+def login(request):
+    return render(request, 'auth/login.html')
     if request.method == 'POST':
         form=BusForm(request.POST,request.FILES)
         if form.is_valid():

@@ -1,13 +1,18 @@
 {% extends 'driver/base.html'%}
 
 {% block content %}
+<<<<<<< HEAD
+
+=======
 <div class="container">
-    <h1>Booking</h1>
-    {{block.super}}
-    <div class="col-sm-4">
-    {% for driver in drivers %}
+  <h1 style="text-align: center;">Booking</h1>
+{{block.super}}
+<div class="row">
+<div class="col-sm-4">
+{% for driver in drivers %}
 {{driver.name}}
 {{driver.email}}
+{{driver.contact}}
 </div>
 <h4 class="" style="padding-top:50">Available buses</h4>
 <div style="padding:50">
@@ -33,5 +38,10 @@
         {% endfor %}
 </div>
 </div>
+</div>
+<<<<<<< HEAD
+>>>>>>> 72b957b5226a67f2cdea0941606461981c5cec7d
+=======
+>>>>>>> 72b957b5226a67f2cdea0941606461981c5cec7d
 {% endfor %}
 {%endblock%}
