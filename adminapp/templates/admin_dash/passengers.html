@@ -2,32 +2,35 @@
 {%block content%}
 
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-11 ">
+	
+	<div class="col-md-12 ">
 		<h5 class="text-center pt-3">Passengers:</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-dark btn-row  btn-sm btn-block" href="">Add Customer</a>
+
 			<table class="table table-sm">
 				<tr>
 					<th></th>
 					<th>Name</th>
 					<th>Email</th>
-					<th>Destination</th>
-					<th>Seat Number</th>
+					<!-- <th>Destination</th>
+					<th>Seat Number</th> -->
 					<th>Date</th>
 					<th>Time</th>
 				</tr>
 
 				{% for customer in book %}
 				<tr>
-					<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'passenger' customer.id %}">View</a></td>
 					<td>{{customer.name}}</td>
 					<td>{{customer.email}}</td>
-					<td> {{customer.dest}} </td>
-					<td> {{customer.seat_no}} </td>
+					<!-- <td> {{customer.dest}} </td>
+					<td> {{customer.seat_no}} </td> -->
 					<td> {{customer.date}} </td>
 					<td> {{customer.time}} </td>
+					<td><a class="btn btn-sm btn-info" href="{% url 'update_order' customer.id %}">Update</a></td>
+					<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' customer.id %}">Delete</a></td>
+
 				</tr>
 				{% endfor %}
 

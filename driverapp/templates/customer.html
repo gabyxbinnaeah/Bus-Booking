@@ -17,7 +17,7 @@
                 <td style="padding:10;">date : {{customer.date}}
                 <td style="padding:10;">time : {{customer.time}}
                 <td style="padding:10;">
-                    <form action="/driver/delete/" method="post">
+                    <form action="" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="id" value="{{bus.id}}">
                         <input class="" type="submit" value="Book Now">
