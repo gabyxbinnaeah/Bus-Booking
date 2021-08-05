@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect, Http404
 from userapp.models import Book
 from decimal import Decimal
 from django.shortcuts import render,redirect
@@ -8,14 +8,12 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
-from django.shortcuts import render
 from .models import *
+from .forms import BusForm
+from django.http import HttpResponseRedirect
+from driverapp.models import Bus
 
 # Create your views here.
-
-
-
 def registeruser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -130,3 +128,25 @@ def delete_booking(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
     return render(request, 'index.html')
+
+
+
+def index(request):
+    buses = Bus.objects.all()
+    return render(request, 'index.html')
+
+def seats(request):
+    return render(request, 'seats.html')
+
+def login(request):
+    return render(request, 'auth/login.html')
+    if request.method == 'POST':
+        form=BusForm(request.POST,request.FILES)
+        if form.is_valid():
+            source=form.cleaned_data['source']
+            dest=form.cleaned_data['dest']
+            search_bus=Bus.search_buses(source,dest)
+            return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
+    else:
+        form = BusForm()
+    return render(request, 'main/index.html',{'form':form}) 

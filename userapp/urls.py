@@ -10,7 +10,9 @@ urlpatterns=[
     path('delete/<int:pk>',views.delete_booking, name='delete_booking'),
     path('booking/',views.booking, name='booking'),
 
-
-
-
-]
+    # path('userapp/',views.index, name='user'),
+    path('userapp/',views.index, name='index'),
+    path('accounts', views.login, name='login'),
+    path('seats', views.seats, name='seats'),
+    
+] 
