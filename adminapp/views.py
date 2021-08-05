@@ -77,6 +77,9 @@ def contact(request):
 
 @login_required(login_url='adminlogin')
 def index(request):
+
+    return render(request, 'index.html')
+
     bus = Bus.objects.all()
     book= Book.objects.all()
     total_customers = book.count()
@@ -91,8 +94,7 @@ def busses(request):
     return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
 
 
-<<<<<<< HEAD
-=======
+
 def registerPage(request):
 	if request.user.is_authenticated:
 		return redirect('admin')
@@ -143,7 +145,7 @@ def admin(request):
 @login_required(login_url='adminlogin') 
 def contact(request):
 	return render(request, 'adminapp/contact.html')
->>>>>>> admin-views-forms
+
 def create_pass(request):
     form = UserCreationForm()
     if request.method == 'POST':
@@ -215,13 +217,13 @@ def passenger(request,pk_test):
     return render(request,'admin_dash/individual_pass.html', context)
 
 def driver(request,pk_test):
-<<<<<<< HEAD
+
     driver = Bus.objects.get(id=pk_test)
     orders = driver.order_set.all()
     order_count = orders.count()
     context={'customer':driver,"orders":orders,"order_count":order_count}
     return render(request,'admin_dash/driver.html', context)
-=======
+
     try:
         driver = Bus.objects.get(id=pk_test)
     except ObjectDoesNotExist:
@@ -229,4 +231,3 @@ def driver(request,pk_test):
     
     context={'bus':driver}
     return render(request,'admin_dash/individual_driver.html',context)
->>>>>>> admin-views-forms
