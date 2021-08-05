@@ -2,26 +2,14 @@
 
 {% block content %}
 <div class="container">
-<<<<<<< HEAD
   <h1 style="text-align: center;">Booking</h1>
 {{block.super}}
 <div class="row">
-    {% for driver in drivers %}
-    {{driver.name}}
-    {{driver.email}}
-    {{driver.contact}}
-
-</div>
-</div>
-{%endfor%}
-{%endblock%}
-=======
-    <h1>Booking</h1>
-    {{block.super}}
-    <div class="col-sm-4">
-    {% for driver in drivers %}
+<div class="col-sm-4">
+{% for driver in drivers %}
 {{driver.name}}
 {{driver.email}}
+{{driver.contact}}
 </div>
 <h4 class="" style="padding-top:50">Available buses</h4>
 <div style="padding:50">
@@ -47,6 +35,6 @@
         {% endfor %}
 </div>
 </div>
+</div>
 {% endfor %}
 {%endblock%}
->>>>>>> origin/development
