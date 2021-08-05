@@ -11,12 +11,16 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+<<<<<<< HEAD
 from pathlib import Path
 import os
 import django_heroku
 import dj_database_url
 from pathlib import Path
 from decouple import config,Csv
+=======
+import os 
+>>>>>>> origin/development
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,10 +45,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'userapp.apps.UserappConfig',
     'driverapp.apps.DriverappConfig',
     'adminapp.apps.AdminappConfig',
     'bootstrap4'
+=======
+    'userapp',
+    'driverapp',
+    'adminapp.apps.AdminappConfig',
+    'bootstrap4',
+>>>>>>> origin/development
 ]
 
 MIDDLEWARE = [
@@ -102,6 +113,10 @@ else:
     DATABASES={
         'default':dj_database_url.config(
             default=config('DATABASE_URL'))
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'booking',
     }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
