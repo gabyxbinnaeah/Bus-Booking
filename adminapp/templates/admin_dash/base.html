@@ -1,0 +1,46 @@
+{% load static %}
+{%load bootstrap4%}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title>Bus Booking App - {{title}}</title>
+  {% else %}
+  <title> Bus Booking </title>
+  {% endif %}
+
+  {%block style%}
+  {%bootstrap_css%}
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{%static 'css/base.css'%}">
+  {%endblock%}
+
+
+</head>
+
+<body>
+  {% include "admin_dash/navbar.html" %}
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{message.tags}}">
+    {{message}}
+  </div>
+  {% endfor %}
+  {% endif%}
+
+  {% block content %} {%endblock%}
+
+
+  {%block scripts%}
+  {%bootstrap_javascript%}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %}
+  <script src="adminapp/admin.js"></script>
+  {%endblock%}
+</body>
+
+</html>

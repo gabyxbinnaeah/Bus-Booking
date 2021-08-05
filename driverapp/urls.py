@@ -3,11 +3,10 @@ from . import views
 from django.conf.urls import url
 
 urlpatterns=[
-    # path('index',views.index, name='index'),
+    path('',views.index, name='index'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('customer/',views.customer, name='customer'),
-    path('registeruser/',views.registeruser, name='register'),     
+    path('registeruser/',views.registeruser, name='register'),
+    path('loginpage/',views.loginpage, name='loginpage'),     
     path('driverapp/',views.index, name='driverapp'),
-    path('loginpage/',views.loginpage, name='loginpage'), 
-    path('', views.dashboard, name='dashboard'),
-    path('delete_bus/', views.delete_bus, name='delete'),  
 ]
