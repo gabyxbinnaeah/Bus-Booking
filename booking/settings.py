@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'compressor',
     'sass_processor'
+<<<<<<< HEAD
+=======
+    'crispy_forms',
+>>>>>>> admin-views-forms
 ]
 
 MIDDLEWARE = [
@@ -171,5 +175,10 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+<<<<<<< HEAD
 AUTH_USER_MODEL='adminapp.User'
 SASS_PROCESSOR_ROOT = STATIC_ROOT
+=======
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+AUTH_USER_MODEL='adminapp.User'
+>>>>>>> admin-views-forms

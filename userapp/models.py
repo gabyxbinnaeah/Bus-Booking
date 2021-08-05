@@ -48,9 +48,21 @@ class Book(models.Model):
                        (CANCELLED, 'Cancelled'),)
     email = models.EmailField()
     name = models.CharField(max_length=30)
+<<<<<<< HEAD
     busid =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE,)
     userid= models.ForeignKey(User,on_delete=models.CASCADE,null=True )
     dest = models.CharField(max_length=30,null=True ,blank=True)
+=======
+    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
+    # user = models.ForeignKey(User,on_delete=models.CASCADE)
+    userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
+    source = models.CharField(max_length=100, choices=SOURCE_CHOICES)
+    dest = models.CharField(max_length=100,null=True ,blank=True, choices=DESTINATION_CHOICES)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True )
+    phone_number = models.IntegerField()
+    destination = models.CharField(max_length=30,null=True ,blank=True, choices=DESTINATION_CHOICES)
+>>>>>>> admin-views-forms
     seat_no = models.CharField(max_length=30,null=True)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()

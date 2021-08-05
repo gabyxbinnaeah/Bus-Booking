@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django import forms
+from .models import Bus,Book,Admin
+>>>>>>> admin-views-forms
 from userapp.models import Book
 from driverapp.models import Bus
 from django import forms
@@ -7,12 +14,17 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import Bus,Book,Admin
 
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']
+
 
 class UserCreationForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:
         model = Book
-        fields = ['name','email','phone_number','fare','date','time','status']
+        fields = ['name','email','phone_number','fare','date','time','destination']
                   
 class BusOwnerCreationForm(forms.ModelForm):
     
@@ -20,6 +32,7 @@ class BusOwnerCreationForm(forms.ModelForm):
         model = Bus
         fields = ['bus_name','destination','fare','date','time','fare']
         
+<<<<<<< HEAD
 
 
 
@@ -28,3 +41,5 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
+=======
+>>>>>>> admin-views-forms
