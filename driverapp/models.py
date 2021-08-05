@@ -60,6 +60,8 @@ class Bus(models.Model):
     # def search_bus(cls, name):
     #     return cls.objects.filter(user__username__icontains=name).all()
 
+    def search_buses(cls, source, dest):
+        return cls.objects.filter(source__icontains=source , dest__icontains=dest).all()
 
 
 

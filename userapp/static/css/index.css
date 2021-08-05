@@ -1,24 +1,42 @@
 body {
+    overflow-x: hidden;
+}
+
+.body {
     background-image: url('https://www.allianztravelinsurance.com/v_1557948389077/media/travel/planning/top-reasons-to-travel-by-bus.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 15%;
+    top: 0px;
 }
 
 .nav {
     list-style: none;
     float: right !important;
-    margin-right: 25%;
+    margin-right: 15%;
+    clear: left;
+}
+
+.nav>li {
+    font-family: 'Arvo', serif;
+    font-weight: 600;
+    letter-spacing: 5px;
+}
+
+.nav>li>a {
+    color: black;
 }
 
 .landing-nav {
     width: 100%;
-    margin-top: 2%;
+    padding-top: 2%;
     clear: both;
     margin-left: 5%;
 }
 
 .sign:hover {
-    outline: 2px solid #EF8354;
+    outline: 3px solid #EF8354;
+    outline-style: groove;
     border-radius: 10px;
 }
 
@@ -32,4 +50,30 @@ body {
     background-color: #EF8354;
     width: 100%;
     border-radius: 25px;
+}
+
+.available_buses {
+    width: 100%;
+    background-color: #EF8354;
+    font-family: 'Arvo', serif;
+    font-weight: bold;
+    letter-spacing:5px;
+    color: white;
+}
+
+table {
+    width: 100%;
+    margin-top: 5%;
+}
+
+.book_button {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+
+tr.table_row {
+    border-bottom: 1px solid black;
 }
