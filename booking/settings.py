@@ -29,39 +29,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
     'bootstrap4',
     'adminapp.apps.AdminappConfig',
     'driverapp.apps.DriverappConfig',
     'userapp.apps.UserappConfig',
-=======
-<<<<<<< HEAD
-    'userapp.apps.UserappConfig',
-    'driverapp.apps.DriverappConfig',
-    'adminapp.apps.AdminappConfig',
-    'bootstrap4',
     'crispy_forms',
-=======
-<<<<<<< HEAD
-    'userapp.apps.UserappConfig',
-    'driverapp.apps.DriverappConfig',
-    'adminapp.apps.AdminappConfig',
-    'bootstrap4'
-=======
-    'userapp',
-    'driverapp',
-<<<<<<< HEAD
-    'adminapp',
-    'bootstrap4',
     'compressor',
     'sass_processor'
-=======
-    'adminapp.apps.AdminappConfig',
-    'bootstrap4',
->>>>>>> origin/development
->>>>>>> origin/development
->>>>>>> origin/development
->>>>>>> origin/development
 ]
 
 MIDDLEWARE = [
@@ -99,7 +73,6 @@ WSGI_APPLICATION = 'booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-<<<<<<< HEAD
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
@@ -124,44 +97,13 @@ else:
            default=config('DATABASE_URL')
        )
    }
-=======
-MODE=config('MODE',default='dev')
-SECRET_KEY=config('SECRET_KEY')
-DEBUG=config('DEBUG',default=False,cast=bool)
-# development
-if config('MODE')=='dev':
-    DATABASES ={
-        'default':{
-            'ENGINE':'django.db.backends.postgresql_psycopg2',
-            'NAME':config('DB_NAME'),
-            'USER':config('DB_USER'),
-            'PASSWORD':config('DB_PASSWORD'),
-            'HOST':config('DB_HOST'),
-            'PORT':''
-        }
-    }
-# production
-else:
-    DATABASES={
-        'default':dj_database_url.config(
-            default=config('DATABASE_URL'))
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'booking',
-    }
->>>>>>> origin/development
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
-=======
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS',cast=Csv())
 ALLOWED_HOSTS='.localhost', '.herokuapp.com', '.127.0.0.1'
->>>>>>> origin/development
 
 
 # Password validation
@@ -229,8 +171,4 @@ STATICFILES_FINDERS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-<<<<<<< HEAD
 SASS_PROCESSOR_ROOT = STATIC_ROOT
-=======
-# AUTH_USER_MODEL='adminapp.User'
->>>>>>> origin/development
