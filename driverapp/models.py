@@ -20,6 +20,10 @@ class Driver(models.Model):
 
     def delete_driver(self):
         self.delete() 
+    
+    def __str__(self):
+        return self.email  
+
 
 class Bus(models.Model):
     bus_name = models.CharField(max_length=30)
