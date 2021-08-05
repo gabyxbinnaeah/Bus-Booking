@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from userapp.models import Book
 from driverapp.models import Bus
 from .forms import UserCreationForm,BusOwnerCreationForm
-
+from django.core.exceptions import ObjectDoesNotExist
+from django.http.response import Http404
 # Create your views here.
 def index(request):
     bus = Bus.objects.all()
@@ -81,15 +82,19 @@ def delete_bus(request, pk):
 	return render(request, 'admin_dash/delete_bus.html', context)
 
 def passenger(request,pk_test):
-    passenger = Book.objects.get(id=pk_test)
-    orders = passenger.order_set.all()
-    order_count = orders.count()
-    context={'customer':passenger,"orders":orders,"order_count":order_count}
-    return render(request,'admin_dash/passenger.html', context)
+    try:
+        passenger = Book.objects.get(id=pk_test)
+    except ObjectDoesNotExist:
+        raise Http404()
+    
+    context={'passenger':passenger}
+    return render(request,'admin_dash/individual_pass.html', context)
 
 def driver(request,pk_test):
-    driver = Bus.objects.get(id=pk_test)
-    orders = driver.order_set.all()
-    order_count = orders.count()
-    context={'customer':driver,"orders":orders,"order_count":order_count}
-    return render(request,'admin_dash/driver.html', context)
+    try:
+        driver = Bus.objects.get(id=pk_test)
+    except ObjectDoesNotExist:
+        raise Http404()
+    
+    context={'bus':driver}
+    return render(request,'admin_dash/individual_driver.html',context)

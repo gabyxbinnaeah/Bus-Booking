@@ -8,7 +8,7 @@ class UserCreationForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:
         model = Book
-        fields = ['name','email','phone_number','fare','date','time','status']
+        fields = ['name','email','phone_number','fare','date','time','destination']
                   
 class BusOwnerCreationForm(forms.ModelForm):
     

@@ -15,7 +15,7 @@ class Book(models.Model):
     bus_id =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE,)
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True )
     phone_number = models.IntegerField()
-    dest = models.CharField(max_length=30,null=True ,blank=True)
+    destination = models.CharField(max_length=30,null=True ,blank=True)
     seat_no = models.CharField(max_length=30,null=True)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
