@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'compressor',
     'sass_processor'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -172,3 +173,4 @@ STATICFILES_FINDERS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SASS_PROCESSOR_ROOT = STATIC_ROOT
+AUTH_USER_MODEL='adminapp.User'
