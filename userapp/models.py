@@ -1,27 +1,5 @@
 from django.db import models
-
-from django.contrib.auth.models import User
-
-# from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-
-
-# class User(models.Model):
-#     username = models.CharField(max_length=30, unique=True)
-#     password = models.CharField(max_length=30)
-#     email = models.EmailField(max_length=30, unique=True, verbose_name="Email")
-#     date_joined = models.DateField(auto_now_add=True, verbose_name='date_joined')
-#     last_login = models.DateField(auto_now=True, verbose_name='last_login')
-#     is_admin=models.BooleanField(default=False)
-#     is_staff=models.BooleanField(default=False)
-#     is_active=models.BooleanField(default=True)
-#     is_superuser=models.BooleanField(default=False)
-
-#     USERNAME_FIELD='username'
-#     REQUEST_FIELD=['username', 'email', 'password']
-#     def __str__(self):
-#         return self.email  
-
-from adminapp.models import Admin
+from adminapp.models import Admin,User
 from driverapp.models import Bus
 
 class User(models.Model):
@@ -70,11 +48,9 @@ class Book(models.Model):
                        (CANCELLED, 'Cancelled'),)
     email = models.EmailField()
     name = models.CharField(max_length=30)
-    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
-    bus_id =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
-    userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
-    source = models.CharField(max_length=100, choices=SOURCE_CHOICES)
-    dest = models.CharField(max_length=100,null=True ,blank=True, choices=DESTINATION_CHOICES)
+    busid =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE,)
+    userid= models.ForeignKey(User,on_delete=models.CASCADE,null=True )
+    dest = models.CharField(max_length=30,null=True ,blank=True)
     seat_no = models.CharField(max_length=30,null=True)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()

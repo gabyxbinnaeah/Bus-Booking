@@ -102,7 +102,7 @@
     }
 
     #sidebar ul li a:hover {
-        color: 284b63;
+        color: #284b63;
         background: #fff;
     }
 
@@ -142,9 +142,10 @@
         margin-bottom: 5px;
     }
 
-    a.download {
-        background: #fff;
-        color: #284b63;
+    a.download,
+    a.download:hover {
+        background: #284b63 !important;
+        color: #fff !important;
     }
 
     a.article,
@@ -221,30 +222,26 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="#">Scheduled Trips</a>
-            </li>
+            
           
             <li>
                 <a href="{%url 'busses-dash' %}">Buses</a>
             </li>
             <li>
-                <a href="#">Drivers</a>
+                <a href="{% url 'create_order'%}">Create Passenger</a>
             </li>
             <li>
-                <a href=" {%url 'passengers-dash' %} ">Passengers</a>
+                <a href=" {%url 'create_order_bus' %} ">Create Bus Owners/ Drivers</a>
             </li>
-            <li>
-                <a href="">Contact</a>
-            </li>
+            
         </ul>
 
         <ul class="list-unstyled CTAs">
             <li>
-                <a href="" class="download">Driver Dashboard</a>
+                <a href="{%url 'busses-dash'%}" class="">Driver Dashboard</a>
             </li>
             <li>
-                <a href="" class="article">User Dashboard</a>
+                <a href="{%url 'passengers-dash'%}" class="">User Dashboard</a>
             </li>
         </ul>
     </nav>
@@ -270,7 +267,7 @@
 
                 <div class="dropdown show" style="padding-right: 30px;">
                     <button class="btn btn-info dropdown-toggle btn-md" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Signin As
+                      Sign in As
                     </button>
                   
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding-right:40px;">
