@@ -1,0 +1,35 @@
+body {
+    background-image: url('https://www.allianztravelinsurance.com/v_1557948389077/media/travel/planning/top-reasons-to-travel-by-bus.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav {
+    list-style: none;
+    float: right !important;
+    margin-right: 25%;
+}
+
+.landing-nav {
+    width: 100%;
+    margin-top: 2%;
+    clear: both;
+    margin-left: 5%;
+}
+
+.sign:hover {
+    outline: 2px solid #EF8354;
+    border-radius: 10px;
+}
+
+.form {
+    margin-top: 5%;
+    background-color: white;
+    padding: 6%;
+}
+
+.submit {
+    background-color: #EF8354;
+    width: 100%;
+    border-radius: 25px;
+}

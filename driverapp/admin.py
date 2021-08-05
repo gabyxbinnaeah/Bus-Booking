@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Book,Bus,Driver
-
+from .models import Driver, Bus, Book
 # Register your models here.
+admin.site.register(Driver)
 admin.site.register(Bus)
 admin.site.register(Book)
-admin.site.register(Driver)
