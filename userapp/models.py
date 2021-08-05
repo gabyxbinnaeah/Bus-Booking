@@ -1,4 +1,5 @@
 from django.db import models
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 # from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -19,6 +20,22 @@ from django.contrib.auth.models import User
 #     REQUEST_FIELD=['username', 'email', 'password']
 #     def __str__(self):
 #         return self.email  
+=======
+from adminapp.models import Admin
+from driverapp.models import Bus
+
+<<<<<<< HEAD
+=======
+# Create your models here.
+>>>>>>> origin/development
+class User(models.Model):
+    name = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+    email = models.EmailField()
+    
+    def __str__(self):
+        return self.email  
+>>>>>>> origin/development
 
 
 class Bus(models.Model):
@@ -57,6 +74,9 @@ class Book(models.Model):
                        (CANCELLED, 'Cancelled'),)
     email = models.EmailField()
     name = models.CharField(max_length=30)
+    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
+    bus_id =models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
+    # user = models.ForeignKey(User,on_delete=models.CASCADE)
     userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
     source = models.CharField(max_length=100, choices=SOURCE_CHOICES)

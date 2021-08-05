@@ -1,10 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+# class User(AbstractUser):
+#     USER_TYPE_CHOICES =((1,'admin'),
+#                         (2,'Bus'), 
+#                         (3,'Book'))
+#     # user_type =models.PositiveIntegerField(choices=USER_TYPE_CHOICES)
 class Admin(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
+    # user =models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     
     def __str__(self):
         return self.email  
@@ -19,6 +26,13 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+    
+
+    @classmethod
+    def bus_details(cls):
+        bus_details_list=cls.objects.all()
+        return bus_details_list 
+
 
     def __str__(self):
         return self.bus_name
@@ -44,5 +58,6 @@ class Book(models.Model):
     status = models.CharField(choices=TICKET_STATUSES, default=BOOKED, max_length=2)
 
     def __str__(self):
+        return self.email
         return self.email
 

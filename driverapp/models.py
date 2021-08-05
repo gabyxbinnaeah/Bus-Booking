@@ -1,10 +1,27 @@
 from django.db import models
+from adminapp.models import Admin
+
 
 
 class Driver(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
+    contact= models.CharField(max_length=30)
+    
+    def __str__(self):
+        return self.email
+    
+    @classmethod
+    def Driver(cls):
+        drivers = cls.objects.all()
+        return drivers
+
+    def save_driver(self):
+        self.save()
+
+    def delete_driver(self):
+        self.delete() 
     
     def __str__(self):
         return self.email  
@@ -19,9 +36,31 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+    admin = models.ForeignKey(Admin,on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return self.bus_name
+
+    def __str__(self):
+        return self.bus_name
+    
+    @classmethod
+    def Bus(cls):
+        buses = cls.objects.all()
+        return buses
+
+
+    def save_bus(self):
+        self.save()
+
+    def delete_bus(self):
+        self.delete()
+    
+    # @classmethod
+    # def search_bus(cls, name):
+    #     return cls.objects.filter(user__username__icontains=name).all()
+
 
 
 

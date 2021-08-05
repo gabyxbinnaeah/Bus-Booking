@@ -1,0 +1,43 @@
+{%extends 'admin_dash/base.html' %}
+{%block content%}
+
+<div class="container-fluid">
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-11">
+		<h5 class="text-center pt-3">Bus Drivers:</h5><hr>
+	<div class="card card-body">
+		<a class="btn btn-dark  btn-sm btn-block m-1 p-2" href="{}">Create more Busses</a>
+		<table class="table table-sm">
+			<tr>
+				<th>Bus Name</th>
+				<th>Destination</th>
+                <th>Number of Seats</th>
+                <th>Date</th>
+				<th>Fare</th>
+				<th>Time</th>
+			</tr>
+
+			{% for order in bus %}
+			<tr>
+				<td>{{order.bus_name}}</td>
+				<td>{{order.dest}}</td>
+                <td>{{order.nos}}</td>
+				<td> {{order.date}} </td>
+                <td> {{order.fare}} </td>
+                <td> {{order.time}} </td>
+				<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+
+				<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+
+			</tr>
+			{% endfor %}
+
+
+		</table>
+	</div>
+</div>
+
+</div>
+</div>
+{%endblock%}
