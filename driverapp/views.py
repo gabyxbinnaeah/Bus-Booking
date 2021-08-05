@@ -20,6 +20,10 @@ def index(request):
 # def login(request):
 #     return render(request, 'registration/login.html')
 
+def dashboard(request):
+    return render(request,'driver/dashboard.html')
+
+
 
 def delete_bus(request):
     bu_id = request.POST['id']

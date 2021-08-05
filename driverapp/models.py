@@ -50,7 +50,6 @@ class Bus(models.Model):
         buses = cls.objects.all()
         return buses
 
-
     def save_bus(self):
         self.save()
 

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+.env
+=======
 virtual/
 
 .env
@@ -165,3 +168,4 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+>>>>>>> origin/development

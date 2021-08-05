@@ -30,6 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 <<<<<<< HEAD
+    'bootstrap4',
+    'adminapp.apps.AdminappConfig',
+    'driverapp.apps.DriverappConfig',
+    'userapp.apps.UserappConfig',
+=======
+<<<<<<< HEAD
     'userapp.apps.UserappConfig',
     'driverapp.apps.DriverappConfig',
     'adminapp.apps.AdminappConfig',
@@ -52,6 +58,7 @@ INSTALLED_APPS = [
 =======
     'adminapp.apps.AdminappConfig',
     'bootstrap4',
+>>>>>>> origin/development
 >>>>>>> origin/development
 >>>>>>> origin/development
 >>>>>>> origin/development

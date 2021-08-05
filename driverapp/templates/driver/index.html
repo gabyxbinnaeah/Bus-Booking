@@ -2,6 +2,20 @@
 
 {% block content %}
 <div class="container">
+<<<<<<< HEAD
+  <h1 style="text-align: center;">Booking</h1>
+{{block.super}}
+<div class="row">
+    {% for driver in drivers %}
+    {{driver.name}}
+    {{driver.email}}
+    {{driver.contact}}
+
+</div>
+</div>
+{%endfor%}
+{%endblock%}
+=======
     <h1>Booking</h1>
     {{block.super}}
     <div class="col-sm-4">
@@ -35,3 +49,4 @@
 </div>
 {% endfor %}
 {%endblock%}
+>>>>>>> origin/development
