@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.conf.urls import url
 
 urlpatterns=[
     path('',views.index, name='passengers-dash'),
@@ -12,5 +13,9 @@ urlpatterns=[
     path('create_order_bus/', views.create_bus, name="create_order_bus"),
     path('update_order_bus/<str:pk>/', views.update_bus, name="update_order_bus"),
     path('delete_order_bus/<str:pk>/', views.delete_bus, name="delete_order_bus"),
-
+   url(r'admin/',views.admin, name='admin'),
+   url(r'^register/$', views.registerPage, name="adminregister"),
+   url(r'^login/$', views.loginPage, name="adminlogin"), 
+   url(r'^logout/$',views.logoutUser,name="logout"),
+   url(r'^contact/$',views.contact,name="contact"),
 ]

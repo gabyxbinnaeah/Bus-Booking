@@ -1,4 +1,4 @@
-#!/home/moringa/Documents/Django/booking/virtual/bin/python3
+#!/home/moringa/Documents/Django/Bus_booking/Bus-Booking/virtual/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
