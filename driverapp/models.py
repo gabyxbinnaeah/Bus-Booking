@@ -1,5 +1,5 @@
 from django.db import models
-from adminapp.models import Admin,User
+from adminapp.models import Admin
 
 
 
