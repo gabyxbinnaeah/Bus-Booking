@@ -12,9 +12,8 @@ class User(models.Model):
 class Bus(models.Model):
     bus_name = models.CharField(max_length=30)
     source = models.CharField(max_length=30)
-    dest = models.CharField(max_length=30)
-    nos = models.IntegerField(default=0)
-    rem = models.CharField(null=True, max_length=5)
+    destination = models.CharField(max_length=30)
+    number_of_Seats = models.IntegerField(default=0)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
 
@@ -22,8 +21,8 @@ class Bus(models.Model):
         return self.bus_name
     
     @classmethod
-    def search_buses(cls, source, dest):
-        return cls.objects.filter(source__icontains=source , dest__icontains=dest).all()
+    def search_buses(cls, source, destination):
+        return cls.objects.filter(source__icontains=source , destination__icontains=destination).all()
 
 
 

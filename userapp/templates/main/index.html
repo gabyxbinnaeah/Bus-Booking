@@ -39,7 +39,8 @@
 
 <button class="btn btn-lg available_buses">AVAILABLE BUSES</button>
 <div class="container">
-
+  {% include 'main/includes/messages.html' %}
+  
   <table id="booking_table">
     <tr>
       <th>Bus type</th>
@@ -53,7 +54,7 @@
     <tr class="table_row">
       <td>{{bus.bus_name}}</td>
       <td>{{bus.source}}</td>
-      <td>{{bus.dest}}</td>
+      <td>{{bus.destination}}</td>
       <td>sh.{{bus.fare}}</td>
       <td>{{bus.date}}</td>
       <td><button class="btn btn-md book_button float-right">BOOK NOW</button></td>
