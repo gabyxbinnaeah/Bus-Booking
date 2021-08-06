@@ -7,7 +7,7 @@ class Driver(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
-    contact= models.CharField(max_length=30)
+   
     
     def __str__(self):
         return self.email
@@ -36,7 +36,7 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
-    admin = models.ForeignKey(Admin,on_delete=models.CASCADE,blank=True,null=True,related_name='admin')
+    admin = models.ForeignKey(Admin,on_delete=models.CASCADE,blank=True,null=True,related_name="bus_admin")
     
 
     def __str__(self):
@@ -74,7 +74,7 @@ class Book(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=30)
     userid =models.ForeignKey(Driver,null=True,on_delete=models.CASCADE)
-    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
+    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE,related_name="bus_id")
     source = models.CharField(max_length=30)
     dest = models.CharField(max_length=30,null=True ,blank=True)
     seat_no = models.CharField(max_length=30,null=True)
