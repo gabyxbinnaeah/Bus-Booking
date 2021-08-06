@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking</title>
+    <title>Document</title>
     <style>
         /*
             DEMO STYLE
@@ -208,12 +208,21 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <!-- <h3>Bootstrap Sidebar</h3> -->
+                <div class="row">
+                    <div class="profpic col-md-4" style="border-radius:50%; height:90px; background-color: white;">
+                    </div>
+                    <!-- <div class="col-md-2"></div> -->
+                    <div class="col-md-8" style="color:white;">
+                        <p>Name : Gabu</p>
+                        <p>Sacco:ManMo</p>
+                    </div>
+                </div>
 
                 <!-- <img src="https://images.unsplash.com/photo-1621546415704-0147b05ed744?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGJ1c2VzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt=""> -->
             </div>
 
             <ul class="list-unstyled components">
-                <p>Driver Dashboard</p>
+                <p>Admin Dashboard</p>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -229,14 +238,21 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">New Bus</a>
+                    <a href="#">Scheduled Trips</a>
                 </li>
 
                 <li>
-                    <a href="#">Costs</a>
+                    <a href="#">Buses</a>
                 </li>
                 <li>
-                    <a href="#">Route</a>
+                    <a href="#">Drivers</a>
+                </li>
+                <li>
+                    <a href="#">Drivers</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'contact'%}">Contact</a>
                 </li>
             </ul>
 
@@ -276,54 +292,19 @@
                         </button>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding-right:40px;">
-                            <a class="dropdown-item  btn btn-light " href="#">Admin</a>
-                            <a class="dropdown-item  btn btn-light " href="{% url 'register'%}">Driver</a>
+                            <a class="dropdown-item  btn btn-light " href="{% url 'adminlogin' %}">Admin</a>
+                            <a class="dropdown-item  btn btn-light " href="#">Driver</a>
                             <a class="dropdown-item btn btn-light " href="#">User</a>
-                        </div>
+                            <a class="dropdown-item btn btn-light " href="{% url 'logout'%}">Log Out</a>
 
+                        </div>
                     </div>
+
+
                 </div>
             </nav>
 
             <!-- body -->
-            <div class="driver">
-                    <div class="container">
-                        <h1>Booking</h1>
-                        {{block.super}}
-                    
-                        <div class="col-sm-8">
-                            <h4 class="" style="padding-top:50">Drivers</h4>
-                            {% for driver in drivers %}
-                            <h5>driver name:{{driver.name}}</h5>
-                            <h5>driver email:{{driver.email}}</h5>
-                    
-                        </div>
-                        {% endfor %}
-                        <h4 class="" style="padding-top:50">Available buses</h4>
-                        <div style="padding:50">
-                            <table class="">
-                                {% for bus in bus %}
-                                <tr>
-                                    <td style="padding:10;">Name : {{bus.bus_name}}</td>
-                                    <td style="padding:10;">source : {{bus.source}}</td>
-                                    <td style="padding:10;">Dest : {{bus.dest}}</td>
-                                    <td style="padding:10;">Nos : {{bus.nos}}</td>
-                                    <td style="padding:10;">fare : {{bus.fare}}
-                                    <td style="padding:10;">date : {{bus.date}}
-                                    <td style="padding:10;">time : {{bus.time}}
-                                    <td style="padding:10;">
-                                        <form action="driver/delete_bus" method="post">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="id" value="{{bus.id}}">
-                                            <input class="" type="submit" value="Remove">
-                                            <input class="" type="submit" value="Update">
-                                        </form>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                        </div>
-                    </div>
-            </div>
 
 
 
