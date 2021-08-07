@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 
 def registerPage(request):
 	if request.user.is_authenticated:
-		return redirect('admin')
+		return redirect('passengers-dash')
 	else:
 		form = CreateUserForm()
 		if request.method == 'POST':
@@ -26,7 +26,7 @@ def registerPage(request):
 				user = form.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('adminlogin')
+				return redirect('superapplogin')
 			
 
 		context = {'form':form}
@@ -36,7 +36,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('busses-dash')
+		return redirect('passengers-dash')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -46,7 +46,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect('busses-dash')
+				return redirect('passengers-dash')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
@@ -55,17 +55,17 @@ def loginPage(request):
 
 def logoutUser(request):
 	logout(request)
-	return redirect('adminlogin')
+	return redirect('superapplogin')
 
-@login_required(login_url='adminlogin') 
-def admin(request):
-    return render(request, 'adminapp/index.html') 
+# @login_required(login_url='superapplogin') 
+# def admin(request):
+#     return render(request, 'adminapp/index.html') 
 
-@login_required(login_url='adminlogin') 
+@login_required(login_url='superapplogin') 
 def contact(request):
 	return render(request, 'adminapp/contact.html')
 
-@login_required(login_url='adminlogin')
+@login_required(login_url='superapplogin')
 def index(request):
 
     bus = Bus.objects.all()
@@ -74,7 +74,7 @@ def index(request):
     total_busses = bus.count()
     return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
 
-@login_required(login_url='adminlogin')
+@login_required(login_url='superapplogin')
 def busses(request):
     bus = Bus.objects.all()
     book= Book.objects.all()
@@ -125,15 +125,15 @@ def create_bus(request):
     return render(request,'admin_dash/create_bus_form.html',context)
 
 def update_bus(request,pk):
-    bus = Bus.objects.get(id=pk)
-    form = BusOwnerCreationForm(instance=bus)
+    order = Bus.objects.get(id=pk)
+    form = BusOwnerCreationForm(instance=order)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,instance=bus)
+        form = UserCreationForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
             return redirect('busses-dash')
     context={'form':form}
-    return render(request,'admin_dash/create_bus_form.html'.context)
+    return render(request,'admin_dash/create_bus_form.html',context)
 
 def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms.models import ModelForm
 from .models import *
-from .models import Bus
+from driverapp.models import Bus
 from django import forms
 
 

@@ -16,9 +16,9 @@ class CreateUserForm(UserCreationForm):
 class CreatePasForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:
-        model = Book
-        fields = ['name','email','fare','date','time']
-                  
+        model = Driver
+        fields = ['name','email','Contact']
+                   
 class BusOwnerCreationForm(forms.ModelForm):
     
     class Meta:

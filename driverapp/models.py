@@ -16,7 +16,7 @@ class Driver(models.Model):
 class Bus(models.Model):
     bus_name = models.CharField(max_length=30)
     source = models.CharField(max_length=30)
-    dest = models.CharField(max_length=30)
+    destination = models.CharField(max_length=30)
     nos = models.IntegerField(default=0)
     rem = models.CharField(null=True, max_length=5)
     fare = models.CharField(null=True, max_length=6)
@@ -46,7 +46,7 @@ class Book(models.Model):
     userid =models.ForeignKey(Driver,null=True,on_delete=models.CASCADE)
     busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
     source = models.CharField(max_length=30)
-    dest = models.CharField(max_length=30,null=True ,blank=True)
+    destination = models.CharField(max_length=30,null=True ,blank=True)
     seat_no = models.CharField(max_length=30,null=True)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
@@ -55,4 +55,4 @@ class Book(models.Model):
 
     def _str_(self):
         return self.email
-        return self.email
+        

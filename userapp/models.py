@@ -38,7 +38,7 @@ class Book(models.Model):
     name = models.CharField(max_length=30)
     admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
     userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
-    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
+    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE, related_name="bus")
     source = models.CharField(max_length=100, choices=SOURCE_CHOICES)
     phone_number = models.IntegerField(null=True, blank=True)
     destination = models.CharField(max_length=30,null=True ,blank=True, choices=DESTINATION_CHOICES)
