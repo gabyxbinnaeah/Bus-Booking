@@ -1,97 +1,107 @@
- {%extends 'base.html'%}
-{% block content %}
-{{block.super}}
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+    <div class="movie-container">
+      <label>Pick a Seat:</label>
+      <select id="movie">
+        <option value="10">Bus 1</option>
+        <option value="12">Bus</option>
+        <option value="8">Toy Story 4 ($8)</option>
+        <option value="9">The Lion King ($9)</option>
+      </select>
+    </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="bus-container">
-        
+    <ul class="showcase">
+      <li>
+        <div class="seat"></div>
+        <small>N/A</small>
+      </li>
 
-      <ul class="showcase">
-        <li>
-          <div class="seat"></div>
-          <small>Available</small>
-        </li>
-        <li>
-          <div class="seat selected"></div>
-          <small>Selected</small>
-        </li>
-        <li>
-          <div class="seat occupied"></div>
-          <small>Occupied</small>
-        </li>
-      </ul>
+      <li>
+        <div class="seat selected"></div>
+        <small>Selected</small>
+      </li>
 
-      <div class="container">
-        <div class="screen"></div>
+      <li>
+        <div class="seat occupied"></div>
+        <small>Occupied</small>
+      </li>
+    </ul>
 
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-
-        
-        </div>
-      
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-        
-          <div class="seat occupied"></div>
-          <div class="seat occupied"></div>
-        </div>
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-         
-        </div>
-
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-         
-        </div>
-
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-         
-        </div>
-
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-         
-        </div>
-
-        <div class="row">
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-          <div class="seat"></div>
-         
-        </div>
-       
-        
-     
+    <div class="container">
+      <div class="screen"></div>
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
       </div>
 
-      <!-- <p class="text">
-        You have selected <span id="count">0</span> seats for a price of ksh <span id="total">0</span>
-      </p> -->
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat occupied"></div>
+      </div>
 
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
 
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat"></div>
+        <div class="seat occupied"></div>
+        <div class="seat occupied"></div>
+        <div class="seat occupied"></div>
+        <div class="seat"></div>
+      </div>
     </div>
-    
 
-{% endblock %}
+    <p class="text">
+      You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
+    </p>
+    <button class="btn btn-success book">book</button>
+
+      <script src="{% static 'app.js' %}"></script>
+
+
+    {% endblock %}
