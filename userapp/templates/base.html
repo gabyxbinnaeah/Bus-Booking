@@ -8,6 +8,8 @@
 <head>
     <meta charset="utf-8">
 {% block styles %}
+<link href="{% static 'test.css' %}" rel="stylesheet" type="text/css" />
+
 <link href="{% static 'index.css' %}" rel="stylesheet" type="text/css" />
 {%endblock%}
 
@@ -27,6 +29,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static 'app.js' %}"></script>
     <script src="{% static 'jq.js' %}"></script>
+    <script src="{% static 'test.js' %}"></script>
 
     {% bootstrap_javascript %}
     

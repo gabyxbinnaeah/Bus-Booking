@@ -8,7 +8,7 @@ const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 const book = document.querySelector('.book');
 
-var myarray =[]
+
 populateUI();
 let ticketPrice = +movieSelect.value;
 
@@ -75,9 +75,11 @@ updateSelectedCount();
 
 /* Ajax requests*/
 
+
+
   $('.book').click(function(){
       $.ajax({
-          url:'seats/',
+          url:'seats',
           
           type:'post',
           data:{
@@ -89,8 +91,7 @@ updateSelectedCount();
     
 
   })
- 
-
+    alert(count)
   })
   })
   
