@@ -30,9 +30,9 @@ def index(request):
 def booking(request):
     form = SeatsForm()
     if request.method == 'POST':
-        form = SeatsForm(request.POST,request.FILES)
+        form = SeatsForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
+            seat = form.cleaned_data.get('seat_no')
             form.save()
             return redirect('confirm_booking')
     else:
@@ -40,6 +40,5 @@ def booking(request):
     return render(request, 'main/booking.html', {'form': form})
 
 def confirm_booking(request):
-    form = SeatsForm()
-    seat=Book.objects.all()
-    return render(request, 'main/confirm_book.html', {'form': form,'seat': seat})
+    seats=Book.objects.all()
+    return render(request, 'main/confirm_book.html', {'seats': seats})
