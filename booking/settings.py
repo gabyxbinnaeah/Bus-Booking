@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'userapp.apps.UserappConfig',
     'crispy_forms',
     'compressor',
-    'sass_processor'
-    'crispy_forms',
+    'sass_processor',
 
 ]
 
