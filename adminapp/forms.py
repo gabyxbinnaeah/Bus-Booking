@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Bus,Book,Admin
-=======
->>>>>>> f4e49162f01c3bfe1001f0840c24edbc7ccadbd1
 from userapp.models import Book
 from driverapp.models import Bus
 from django import forms
