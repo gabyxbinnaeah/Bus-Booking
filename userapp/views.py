@@ -1,8 +1,11 @@
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.contrib import messages
-from .forms import BusForm
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render,redirect
+from django.template import RequestContext
 from driverapp.models import Bus
+from userapp.models import Book
+
+from .forms import BusForm, SeatsForm
 
 
 def index(request):
@@ -19,7 +22,24 @@ def index(request):
                 messages.error(request, 'Oops! No buses found from your search.')
             return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
         else:
-            messages.error(request,"No available buses.")
+            messages.warning(request,"No available buses.")
     else:
         form = BusForm()
     return render(request, 'main/index.html',{'form':form}) 
+
+def booking(request):
+    form = SeatsForm()
+    if request.method == 'POST':
+        form = SeatsForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save(commit=False)
+            form.save()
+            return redirect('confirm_booking')
+    else:
+        form = SeatsForm()
+    return render(request, 'main/booking.html', {'form': form})
+
+def confirm_booking(request):
+    form = SeatsForm()
+    seat=Book.objects.all()
+    return render(request, 'main/confirm_book.html', {'form': form,'seat': seat})

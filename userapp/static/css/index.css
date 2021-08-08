@@ -6,7 +6,7 @@ body {
     background-image: url('https://www.allianztravelinsurance.com/v_1557948389077/media/travel/planning/top-reasons-to-travel-by-bus.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: 15%;
+    padding-bottom: 10%;
     top: 0px;
 }
 
@@ -58,7 +58,7 @@ body {
     background-color: #EF8354;
     font-family: 'Arvo', serif;
     font-weight: bold;
-    letter-spacing:5px;
+    letter-spacing: 5px;
     color: white;
 }
 
@@ -77,4 +77,12 @@ table {
 
 tr.table_row {
     border-bottom: 1px solid black;
+}
+
+.bus-search-form {
+    padding-top: 20%;
+}
+
+.book>.seat{
+    background-color:green;
 }
