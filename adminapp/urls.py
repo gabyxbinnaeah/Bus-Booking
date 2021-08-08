@@ -10,6 +10,11 @@ urlpatterns=[
     url(r'^logout/$',views.logoutUser,name="logout"),
     url(r'^contact/$',views.contact,name="contact"),
 
+    path('busses-dash/',views.busses, name='busses-dash'),
+    path('register/', views.registerPage, name='adminregister'),
+    path('login/', views.loginPage, name='superapplogin'), 
+    path('logout/',views.logoutUser,name='logout'),
+    path('contact/',views.contact,name='contact'),
     path('create_order/', views.create_pass, name="create_order"),
     path('update_order/<str:pk>/', views.update_pass, name="update_order"),
     path('passenger/<str:pk_test>/', views.passenger, name="passenger"),

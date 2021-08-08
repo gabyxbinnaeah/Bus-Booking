@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import BusCategory,Book
 from .forms import BusForm
 from django.http import HttpResponseRedirect
 from driverapp.models import Bus
@@ -51,7 +51,7 @@ def loginpage(request):
       
     return render(request,'registration/login.html')
 
-
+@login_required(login_url='loginpage')
 def search_bus(request):
     if request.method=='POST':
         source=request.POST.get('source')

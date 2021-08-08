@@ -1,77 +1,153 @@
-from django.shortcuts import redirect, render
-from .models import Driver, Bus, Book
-from django.contrib.auth.decorators import login_required
-# from .forms import CreateUserForm
-from .forms import CreateUserForm
+from django.shortcuts import render,redirect
+from .models import Book
+from driverapp.models import Bus
+from .forms import CreatePasForm,BusOwnerCreationForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.http.response import Http404
 from django.contrib.auth.forms import UserCreationForm
+from .forms import CreateUserForm 
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .models import Driver
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
-# @login_required
-def dashboard(request):
-    drivers = Driver.objects.all()
+
+def registerDriver(request):
+	if request.user.is_authenticated:
+		return redirect('driver')
+	else:
+		form = CreateUserForm()
+		if request.method == 'POST':
+			form = CreateUserForm(request.POST)
+			if form.is_valid():
+				form.save()
+				user = form.cleaned_data.get('username')
+				messages.success(request, 'Account was created for ' + user)
+
+				return redirect('driverlogin')
+			
+
+		context = {'form':form}
+		return render(request, 'registration/register.html', context)
+
+
+
+def loginPage(request):
+	if request.user.is_authenticated:
+		return redirect('drivers_dash')
+	else:
+		if request.method == 'POST':
+			username = request.POST.get('username')
+			password =request.POST.get('password')
+
+			user = authenticate(request, username=username, password=password)
+
+			if user is not None:
+				login(request, user)
+				return redirect('busses-dash')
+
+
+
+			else:
+				messages.info(request, 'Username OR password is incorrect')
+
+		context = {}
+		return render(request, 'registration/login.html', context)
+
+def logoutDriver(request):
+	logout(request)
+	return redirect('driverlogin')
+
+# @login_required(login_url='driverlogin') 
+# def admin(request):
+#     return render(request, 'driver/home.html') 
+
+@login_required(login_url='driverlogin')
+def home(request):
+
     bus = Bus.objects.all()
-    # if not request.user.is_authenticated:
-    #     return render(request, 'registration/login.html')
-    # else:
-    return render(request, 'driver/dashboard.html',{"drivers":drivers, "bus":bus})
+    book= Book.objects.all()
+    total_drivers = book.count()
+    total_busses = bus.count()
+    return render(request, 'driver_dash/driver.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers})
 
-@login_required
-def delete_bus(request):
-    bu_id = request.POST['id']
-    bus = Bus.objects.get(id = bu_id)
-    bus.delete()
-    return render(request, 'driver/dashboard.html',{"bus":bus} )
-    # return HttpResponseRedirect('/driverapp/manage_busees/')
+@login_required(login_url='driverlogin')
+def busses(request):
+    bus = Bus.objects.all()
+    book= Book.objects.all()
+    total_drivers = book.count()
+    total_busses = bus.count()
+    return render(request, 'driver_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers})
 
-def customer(request):
-    customer = Bus.objects.all()
-    return render(request, 'customer.html',{'customer':customer})
-     
 
-def registeruser(request):
+def create_driver(request):
+    form = CreatePasForm()
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        form = CreatePasForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
+            return redirect('drivers_dash')
+    context = {'form':form}
+    return render(request,'driver_dash/create_form.html',context)
 
-            return redirect('loginpage')
-    else:
-        form = CreateUserForm
-    context = {
-            
-            'form':form,
-                        }
+def update_driver(request,pk):
+    order = Book.objects.get(id=pk)
+    form = CreatePasForm(instance=order)
+    if request.method == 'POST':
+        form = CreatePasForm(request.POST,instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('drivers_dash')
+    context={'form':form}
+    return render(request,'driver_dash/create_form.html',context)
 
-    return render(request,'registration/register.html',context)
+def delete_driver(request, pk):
+	order = Book.objects.get(id=pk)
+	if request.method == "POST":
+		order.delete()
+		return redirect('drivers_dash')
 
-
-def loginpage(request):
-    if request.user.is_authenticated:
-
-            return redirect('dashboard')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password =request.POST.get('password')
-
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('loginpage')
-            else:
-                messages.info(request, 'Username or password is incorrect')
-
-      
-    return render(request,'registration/login.html')
-
-# def dashboard(request):
-#     return render(request, 'driver/dashboard.html')
+	context = {'item':order}
+	return render(request, 'driver_dash/delete.html', context)
 
 
 def add_bus(request):
-    bus = Bus.objects.all()
-    return render(request, 'driver/bus_added.html')
+    form = BusOwnerCreationForm()
+    if request.method == 'POST':
+        form = BusOwnerCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('busses-dash')
+    context = {'form':form}
+    return render(request,'driver_dash/create_bus_form.html',context)
+
+def update_bus(request,pk):
+    bus = Bus.objects.get(id=pk)
+    form = BusOwnerCreationForm(instance=bus)
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST,instance=bus)
+        if form.is_valid():
+            form.save()
+            return redirect('busses-dash')
+    context={'form':form}
+    return render(request,'driver_dash/create_bus_form.html'.context)
+
+def delete_bus(request, pk):
+	order = Bus.objects.get(id=pk)
+	if request.method == "POST":
+		order.delete()
+		return redirect('busses-dash')
+
+	context = {'item':order}
+	return render(request, 'driver_dash/delete_bus.html', context)
+
+def driver(request,pk_test):
+    try:
+        driver = Driver.objects.get(id=pk_test)
+    except ObjectDoesNotExist:
+        raise Http404()
+    
+    context={'driver':driver}
+    return render(request,'driver_dash/individual_driver.html',context)

@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Bus,Book,Admin
+=======
+>>>>>>> f4e49162f01c3bfe1001f0840c24edbc7ccadbd1
 from userapp.models import Book
 from driverapp.models import Bus
 from django import forms
 from django.forms import fields
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django import forms
+from .models import Admin
 
 class CreateUserForm(UserCreationForm):
 	class Meta:
@@ -13,17 +20,17 @@ class CreateUserForm(UserCreationForm):
 		fields = ['username', 'email', 'password1', 'password2']
 
 
-class UserCreationForm(forms.ModelForm):
+class CreatePasForm(forms.ModelForm):
     email = forms.EmailField()
     class Meta:
         model = Book
-        fields = ['name','email','phone_number','fare','date','time','destination']
+        fields = ['name','email','fare','date','time']
                   
 class BusOwnerCreationForm(forms.ModelForm):
     
     class Meta:
         model = Bus
-        fields = ['bus_name','destination','fare','date','time','fare']
+        fields = ['bus_name','fare','date','time']
         
 
 class CreateUserForm(UserCreationForm):
