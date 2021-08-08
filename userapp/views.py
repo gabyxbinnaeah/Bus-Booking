@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from userapp.forms import BookBus
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def index(request):
@@ -20,6 +23,18 @@ def seats(request):
     return render(request, 'seats.html')
 
 def test(request):
-    return render(request, 'test.html')
+    if request.method == 'POST':
+        form = BookBus(request.POST,request.FILES)
+        print(form.errors)
+        if form.is_valid():
+            post = form.save(commit=False)
+         
+            post.save()
+            return redirect('test')
+    else:
+        form = BookBus()
+    return render(request,'test.html', {"form":form})
+
+
 def login(request):
     return render(request, 'auth/login.html')

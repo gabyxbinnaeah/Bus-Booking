@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'adminapp',
     'bootstrap4',
     'compressor',
-    'sass_processor'
+    'sass_processor',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [

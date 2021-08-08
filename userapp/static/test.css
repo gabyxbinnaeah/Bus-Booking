@@ -22,18 +22,18 @@
     background-color:yellow;      
     } 
     #place .seat{
-    background:url("images/available_seat_img.gif") no-repeat scroll 0 0 transparent;
+    background:grey;
     height:33px;
     width:33px;
     display:block;   
     }
     #place .selectedSeat
     { 
-    background-image:url("images/booked_seat_img.gif");          
+    background:red;          
     }
     #place .selectingSeat
     { 
-    background-image:url("images/selected_seat_img.gif");        
+    background:green;        
     }
     #place .row-3, #place .row-4{
     margin-top:10px;

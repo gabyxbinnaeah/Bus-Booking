@@ -40,6 +40,10 @@ $('.' + settings.seatCss).click(function () {
     }
     else{
         $(this).toggleClass(settings.selectingSeatCss);
+
+        //Modal
+        
+        
         }
     });
      
@@ -61,4 +65,3 @@ $('.' + settings.seatCss).click(function () {
     })
 
 
-    

@@ -2,6 +2,7 @@
 {% extends "base.html"%}
 
 {% load static %}
+{% load bootstrap4 %}
 
 {%  block content %}
 <h2> Choose seats by clicking the corresponding seat in the layout below:</h2>
@@ -21,4 +22,15 @@
         <input type="button" id="btnShow" value="Show All" />           
         </div>
 
+        <div style='column-count: 4'>
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                {%bootstrap_form form %}
+                <input type="Submit" name="submit" value="Submit"/>
+                </form>
+        </div>
+
+
+        
 {%endblock %}
