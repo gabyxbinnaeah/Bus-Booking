@@ -13,8 +13,8 @@
       <ul class="nav">
         <li class="btn btn-lg"><a href="">HOME</a></li>
         <li class="btn btn-lg"><a href="">CONTACT</a></li>
-        <li class="btn btn-lg sign"><a href="">SIGNUP</a></li>
-        <li class="btn btn-lg sign"><a href="">LOGIN</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'register'%}">SIGNUP</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}">LOGIN</a></li>
       </ul>
     </div>
   </div>
@@ -57,7 +57,7 @@
       <td>{{bus.destination}}</td>
       <td>sh.{{bus.fare}}</td>
       <td>{{bus.date}}</td>
-      <td><button class="btn btn-md book_button float-right">BOOK NOW</button></td>
+      <td><a href="{%url 'booking'%}"><button class="btn btn-md book_button float-right">BOOK NOW</button></a></td>
     </tr>
     {%endfor%}
 

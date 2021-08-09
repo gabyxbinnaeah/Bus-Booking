@@ -27,6 +27,33 @@ SEAT_OPTIONS = (
             (24, "24"),
             (25, "25"),
         )
+from django.contrib.auth.models import User
+
+# Create your models here.
+from django.db import models
+
+# Create your models here.
+class BusCategory(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Bus(models.Model):
+    bus_category = models.ForeignKey(BusCategory,on_delete=models.CASCADE,default='')
+    bus_name = models.CharField(max_length=30)
+    source = models.CharField(max_length=30)
+    destination = models.CharField(max_length=30)
+    nos = models.IntegerField(default=0)
+    rem = models.CharField(null=True, max_length=5)
+    fare = models.CharField(null=True, max_length=6)
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self):
+        return self.bus_name
+
+
 
 class Book(models.Model):
     BOOKED = 'B'
@@ -45,7 +72,9 @@ class Book(models.Model):
     checked_seats= models.CharField(max_length=2)
     status = models.CharField(choices=TICKET_STATUSES, default=BOOKED, max_length=2)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-
+    userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
+    busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.email
+        
