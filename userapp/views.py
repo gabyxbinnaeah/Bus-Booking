@@ -4,6 +4,9 @@ from django.shortcuts import render,redirect
 from django.template import RequestContext
 from driverapp.models import Bus
 from userapp.models import Book
+from datetime import date
+
+today = date.today()
 
 from .forms import BusForm, SeatsForm
 
@@ -40,5 +43,6 @@ def booking(request):
     return render(request, 'main/booking.html', {'form': form})
 
 def confirm_booking(request):
-    seats=Book.objects.all()
-    return render(request, 'main/confirm_book.html', {'seats': seats})
+    seats=Book.objects.all().latest('created_at')
+    seat=seats.__dict__
+    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})

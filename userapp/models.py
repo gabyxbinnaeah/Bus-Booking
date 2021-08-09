@@ -38,12 +38,14 @@ class Book(models.Model):
     name = models.CharField(max_length=30)
     source = models.CharField(max_length=30)
     dest = models.CharField(max_length=30,null=True ,blank=True)
-    seat_no = MultiSelectField(max_length=30,null=True,choices=SEAT_OPTIONS)
+    seat_no = MultiSelectField(max_length=200,null=True,choices=SEAT_OPTIONS)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     checked_seats= models.CharField(max_length=2)
     status = models.CharField(choices=TICKET_STATUSES, default=BOOKED, max_length=2)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
 
     def __str__(self):
         return self.email
