@@ -3,7 +3,7 @@ from userapp.models import Book
 from django.shortcuts import render,redirect
 from .forms import *
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout as dj_login
+from django.contrib.auth import authenticate,login,logoutin 
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
