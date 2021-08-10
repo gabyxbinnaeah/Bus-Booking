@@ -32,6 +32,7 @@ SEAT_OPTIONS = (
         )
 
 
+   
 
 class Bus(models.Model):
     bus_name = models.CharField(max_length=30)

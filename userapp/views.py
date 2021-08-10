@@ -1,8 +1,10 @@
 from datetime import date
-from decimal import Decimal
 
+from userapp.models import Book
+from decimal import Decimal
+from .forms import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -79,7 +81,6 @@ def registeruser(request):
                         }
 
     return render(request,'registration/register.html',context)
-
 
 def loginpage(request):
     if request.user.is_authenticated:
