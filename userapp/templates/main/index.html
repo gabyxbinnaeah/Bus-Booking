@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+{%extends 'base2.html'%}
 {%load bootstrap4%}
 {% load crispy_forms_tags %}
 {%load static%}
@@ -12,35 +12,32 @@
     <div>
       <ul class="nav">
         <li class="btn btn-lg"><a href="">HOME</a></li>
-        <li class="btn btn-lg"><a href="">CONTACT</a></li>
-        <li class="btn btn-lg sign"><a href="">SIGNUP</a></li>
-        <li class="btn btn-lg sign"><a href="">LOGIN</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'register'%}">SIGNUP</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}">LOGIN</a></li>
+        <li class="btn btn-lg"><a href="">{{user}}</a></li>
       </ul>
     </div>
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+      <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6  bus-search-form">
         <form action="" method="POST" class="form">
           {% csrf_token %}
           <div>{% bootstrap_form form %}</div>
           <div class="form-group">
-            <input type="submit" class="btn btn-md submit" value="SUBMIT">
+            <input type="submit" class="btn btn-md submit" id="submit" value="SUBMIT">
           </div>
           <input type="hidden" name="next" value="{{next}}">
         </form>
       </div>
       <div class="col-md-6 col-lg-6"></div>
-
     </div>
-
   </div>
 </div>
-
 <button class="btn btn-lg available_buses">AVAILABLE BUSES</button>
-<div class="container">
-
-  <table id="booking_table">
+<div class="container" id="results">
+  {% include 'main/includes/messages.html' %}
+  <table id="booking_table ">
     <tr>
       <th>Bus type</th>
       <th>Departure</th>
@@ -49,17 +46,16 @@
       <th>Date(Departure)</th>
     </tr>
     {%for bus in buses%}
-
     <tr class="table_row">
       <td>{{bus.bus_name}}</td>
       <td>{{bus.source}}</td>
-      <td>{{bus.dest}}</td>
+      <td>{{bus.destination}}</td>
       <td>sh.{{bus.fare}}</td>
       <td>{{bus.date}}</td>
-      <td><button class="btn btn-md book_button float-right">BOOK NOW</button></td>
+      <td><a href="{% url 'booking' %}"><button class="btn btn-md book_button float-right">BOOK NOW</button></a>
+      </td>
     </tr>
     {%endfor%}
-
   </table>
 </div>
 {%endblock %}

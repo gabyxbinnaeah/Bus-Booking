@@ -1,12 +1,9 @@
-# from django.contrib import admin
-# from .models import Bus
+from django.contrib import admin
+from .models import Book, Bus
 
-# # Register your models here.
-# from .models import *
+from .models import *
 
-# # Register your models here.
-# # admin.site.register(Bus)
+# Register your models here.
+# admin.site.register(Bus)
+admin.site.register(Book)
 
-# # admin.site.register(Book)
-
-# admin.site.register(BusCategory)

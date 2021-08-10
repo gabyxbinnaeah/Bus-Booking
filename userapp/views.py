@@ -1,17 +1,67 @@
+from datetime import date
 from django.http.response import HttpResponse, HttpResponseRedirect, Http404
-from userapp.models import Book
 from decimal import Decimal
-from django.shortcuts import render,redirect
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
-from django.urls import reverse
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import BusCategory,Book
-from .forms import BusForm
-from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+from django.template import RequestContext
+from django.urls import reverse
 from driverapp.models import Bus
+from userapp.models import Book
+from .models import Book
+from .forms import BusForm, SeatsForm,CreateUserForm,BookForm
+
+
+today = date.today()
+
+
+@login_required(login_url='loginpage')
+def index(request):
+    buses = Bus.objects.all()
+    if request.method == 'POST':
+        form=BusForm(request.POST,request.FILES)
+        if form.is_valid():
+            source=form.cleaned_data['source']
+            destination=form.cleaned_data['destination']
+            search_bus=Bus.search_buses(source,destination)
+            if search_bus:
+                messages.success(request, 'Found some buses for you')
+            else:
+                messages.error(request, 'Oops! No buses found from your search.')
+            return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
+        else:
+            messages.warning(request,"No available buses.")
+    else:
+        form = BusForm()
+    return render(request, 'main/index.html',{'form':form}) 
+@login_required(login_url='loginpage')
+def booking(request):
+    form = SeatsForm()
+    if request.method == 'POST':
+        form = SeatsForm(request.POST)
+        if form.is_valid():
+            seat = form.cleaned_data.get('seat_no')
+            form.save()
+            return redirect('confirm_booking')
+    else:
+        form = SeatsForm()
+    return render(request, 'main/booking.html', {'form': form})
+@login_required(login_url='loginpage')
+def confirm_booking(request):
+
+    seats=Book.objects.all().latest('created_at')
+    seat=seats.__dict__
+    # seat_no=seat.count()
+    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})
+
+
+def mytravels(request):
+    mytravel=Book.objects.last()
+    return render(request,'main/mytravel.html',{'mytravel':mytravel})
+
 
 # Create your views here.
 def registeruser(request):
@@ -51,56 +101,6 @@ def loginpage(request):
       
     return render(request,'registration/login.html')
 
-@login_required(login_url='loginpage')
-def search_bus(request):
-    if request.method=='POST':
-        source=request.POST.get('source')
-        dest=request.POST.get('dest')
-        date=request.POST.get('date')
-        bus_list=Bus.objects.filter(source=source,dest=dest,date=date)
-        print(bus_list)
-        context={}
-        if bus_list:
-            return render(request,'list.html',locals())
-        else:
-            context["error"]="no buses availble for that destination"
-            return render(request,'search_bus.html',context)
-    else:
-
-        return render(request,'search_bus.html')
-    
-
-def booking(request):
-    if request.method=='POST':
-        busid=request.POST.get('busid')
-        seats=int(request.POSt.get('nos'))
-        bus=Bus.objects.get(id=busid)
-        context={}
-        if bus:
-            if bus.rem > int(seats):
-                name=bus.bus_name
-                cost=int(seats)*bus.price
-                source=bus.source
-                dest=bus.dest
-                nos=Decimal(bus.nos)
-                price=bus.price
-                date=bus.date
-                time=bus.time
-                userid=request.user.id
-                rem=bus.rem -seats
-                Bus.objects.filter(id=busid).update(rem=rem)
-                book=Book.objects.create(time=time,date=date,price=price,nos=nos,dest=dest,source=source,bus_name=name,status='BOOKED')
-                print('book id ',book.id)
-               
-                return render(request,'booking.html',locals())
-            else:
-                context["error"]="select few seats"
-                return render(request,'search_bus.html',context)
-        else:
-     
-            return render(request,'search_bus.html')
-
-
 
 def logout_page(request):
     logout(request) 
@@ -108,7 +108,7 @@ def logout_page(request):
 
 def checkout(request):
     books=Book.objects.all()
-    return render(request,'checkout.html',{'books':books})
+    return render(request,'main/checkout.html',{'books':books})
 
 def update(request,pk):
     book = Book.objects.get(pk=pk)
@@ -129,24 +129,3 @@ def delete_booking(request, pk):
     book.delete()
     return render(request, 'index.html')
 
-
-
-def index(request):
-    buses = Bus.objects.all()
-    return render(request, 'index.html')
-
-def seats(request):
-    return render(request, 'seats.html')
-
-def login(request):
-    return render(request, 'auth/login.html')
-    if request.method == 'POST':
-        form=BusForm(request.POST,request.FILES)
-        if form.is_valid():
-            source=form.cleaned_data['source']
-            dest=form.cleaned_data['dest']
-            search_bus=Bus.search_buses(source,dest)
-            return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
-    else:
-        form = BusForm()
-    return render(request, 'main/index.html',{'form':form}) 
