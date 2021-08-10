@@ -161,3 +161,11 @@ def driver(request,pk_test):
     
     context={'bus':driver}
     return render(request,'admin_dash/individual_driver.html',context)
+
+def driver_details(request):
+    bus = Bus.objects.all()
+    return render(request,'admin_dash/driver.html',{"buss":bus[::-1]})
+
+def driver_route(request):
+    route = Bus.objects.all()
+    return render(request,'admin_dash/route.html',{'route':route})

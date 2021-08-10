@@ -15,13 +15,17 @@ class Driver(models.Model):
 
 class Bus(models.Model):
     bus_name = models.CharField(max_length=30)
-    source = models.CharField(max_length=30)
+    source= models.CharField(max_length=30)
     destination = models.CharField(max_length=30)
     nos = models.IntegerField(default=0)
-    rem = models.CharField(null=True, max_length=5)
+    rem = models.CharField(null=True, max_length=5,blank=True)
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+    name = models.CharField(max_length=30,null=True)
+    password = models.CharField(max_length=30,null=True)
+    email = models.EmailField(null=True)
+    Contact = models.CharField(max_length=10,null=True)
     
 
     @classmethod
