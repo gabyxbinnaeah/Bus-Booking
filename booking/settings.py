@@ -9,15 +9,23 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
-from decouple import config,Csv
-import dj_database_url
 import os
 from pathlib import Path
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+from django.contrib.messages import constants as messages
+from pathlib import Path
+import os
+from decouple import config,Csv
 import django_heroku
+import dj_database_url
+import cloudinary
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,7 +55,13 @@ INSTALLED_APPS = [
     'userapp',
     'driverapp',
     'adminapp',
+    
+    # 'userapp.apps.UserappConfig',
+    # 'driverapp.apps.DriverappConfig',
+    # 'adminapp.apps.AdminappConfig',
     'bootstrap4',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -110,6 +124,7 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -134,7 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -146,7 +161,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -162,6 +180,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+# config/settings.py
+LOGIN_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = 'loginpage'
 
 STATICFILES_DIRS = [
      os.path.join(BASE_DIR, "static"),
