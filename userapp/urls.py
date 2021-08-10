@@ -9,10 +9,10 @@ urlpatterns=[
     path('checkout/',views.checkout, name='checkout'),
     path('delete/<int:pk>',views.delete_booking, name='delete_booking'),
     path('booking/',views.booking, name='booking'),
-
-
     path('mytravel/',views.mytravels,name='mytravels'),
-
     path('confirm_booking/',views.confirm_booking,name='confirm_booking'),
+    # path('userapp/',views.index, name='user'),
+    # path('accounts', views.login, name='login'),
 
-]
+    
+] 

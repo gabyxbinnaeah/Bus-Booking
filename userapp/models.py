@@ -2,6 +2,9 @@ from django.db import models
 from multiselectfield import MultiSelectField
 from django.contrib.auth.models import User
 from django.db import models
+from adminapp.models import Admin
+from driverapp.models import Bus
+
 
 
 SEAT_OPTIONS = (
@@ -32,24 +35,21 @@ SEAT_OPTIONS = (
         )
 
 
-   
-
-class Bus(models.Model):
-    bus_name = models.CharField(max_length=30)
-    source = models.CharField(max_length=30)
-    destination = models.CharField(max_length=30)
-    nos = models.IntegerField(default=0)
-    rem = models.CharField(null=True, max_length=5)
-    fare = models.CharField(null=True, max_length=6)
-    date = models.DateField()
-    time = models.TimeField()
-
-    def __str__(self):
-        return self.bus_name
-
-
 
 class Book(models.Model):
+    DESTINATION_CHOICES = (
+        ('nairobi','Nairobi'),
+        ('nakuru','Nakuru'),
+        ('kericho','Kericho'),
+    )
+    SOURCE_CHOICES=(
+        ('kitale','Kitale'),
+        ('eldoret','Eldoret'),
+        ('kisumu','Kisumu'),
+    )
+
+
+
     BOOKED = 'B'
     CANCELLED = 'C'
 
@@ -57,6 +57,7 @@ class Book(models.Model):
                        (CANCELLED, 'Cancelled'),)
     email = models.EmailField()
     name = models.CharField(max_length=30)
+    admin_id =models.ForeignKey(Admin,null=True,on_delete=models.CASCADE, related_name='admin')
     userid =models.ForeignKey(User,null=True,on_delete=models.CASCADE)
     busid=models.ForeignKey(Bus, null=True,on_delete=models.CASCADE)
     source = models.CharField(max_length=30)
@@ -75,3 +76,4 @@ class Book(models.Model):
     
 
  
+

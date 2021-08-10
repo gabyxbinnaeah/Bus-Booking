@@ -1,25 +1,22 @@
 from datetime import date
-
-from userapp.models import Book
+from django.http.response import HttpResponse, HttpResponseRedirect, Http404
 from decimal import Decimal
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import RequestContext
 from django.urls import reverse
 from driverapp.models import Bus
-
 from userapp.models import Book
+from .models import Book
+from .forms import BusForm, SeatsForm,CreateUserForm,BookForm
 
 
 today = date.today()
 
-from .forms import BusForm, SeatsForm,CreateUserForm,BookForm
 
 @login_required(login_url='loginpage')
 def index(request):
@@ -65,6 +62,8 @@ def mytravels(request):
     mytravel=Book.objects.last()
     return render(request,'main/mytravel.html',{'mytravel':mytravel})
 
+
+# Create your views here.
 def registeruser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -129,3 +128,4 @@ def delete_booking(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
     return render(request, 'index.html')
+
