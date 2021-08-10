@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'userapp.apps.UserappConfig',
     'crispy_forms',
     'compressor',
-    'sass_processor'
-    'crispy_forms',
+    'sass_processor',
+    
 
 ]
 
@@ -198,6 +198,6 @@ STATICFILES_DIRS = [
      
 ]
 
-AUTH_USER_MODEL='adminapp.User'
+# AUTH_USER_MODEL='adminapp.User'
 SASS_PROCESSOR_ROOT = STATIC_ROOT
 
