@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-
 {% load static%}
 {% load bootstrap4%}
-=======
-{% load bootstrap4 %}
-{% load static %}
+
 {% load sass_tags %}
 
->>>>>>> development
 <!DOCTYPE html>
 <html>
 
@@ -31,6 +26,7 @@
 
   {% block styles %}
   {% bootstrap_css %}
+  <link href="{% static 'index.css' %}" rel="stylesheet" type="text/css" />
   
 
 {% endblock %}
@@ -80,16 +76,7 @@
   </script>
    
   {%endblock%}
-    <meta charset="utf-8">
-{% block styles %}
-<link href="{% static 'index.css' %}" rel="stylesheet" type="text/css" />
-{%endblock%}
 
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-
-</html>
->>>>>>> development

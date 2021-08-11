@@ -5,11 +5,11 @@ from .forms import CreatePasForm,BusOwnerCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm 
+from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Admin 
+from .models import Admin
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -161,3 +161,46 @@ def driver(request,pk_test):
     
     context={'bus':driver}
     return render(request,'admin_dash/individual_driver.html',context)
+
+# def profile(request):
+#     try:
+#         profile = request.user.profile
+#     except Profile.DoesNotExist:
+#         profile = Profile(user=request.user)
+#     if request.method == 'POST':
+#         u_form = UserUpdateForm(request.POST,instance=request.user)
+#         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+#         if u_form.is_valid() and p_form.is_valid():
+#             u_form.save()
+#             p_form.save()
+#             messages.success(request, f'Your account has been updated!')
+#             return redirect('profile')
+#     else:
+#         p_form = ProfileUpdateForm(instance=request.user.profile)
+#         u_form = UserUpdateForm(instance=request.user)
+        
+#     context = {
+#         'u_form' : u_form,
+#         'p_form' : p_form,
+
+#     }
+#     return render(request,'admin_dash/profile.html',context)
+
+# def update(request):
+#     if request.method == "POST":
+#         u_form = UserUpdateForm(request.POST, instance=request.user)
+#         p_form = ProfileUpdateForm(request.POST, request.FILES,
+#         instance=request.user.profile)
+#         if u_form.is_valid() and p_form.is_valid():
+#             u_form.save()
+#             p_form.save()
+#             messages.success(request, f'Successfully updated your account!')
+#             return redirect('profile')
+#     else:
+#         u_form = UserUpdateForm(instance=request.user)
+#         p_form = ProfileUpdateForm(instance=request.user.profile)
+#     context = {
+#         'u_form': u_form,
+#         'p_form': p_form
+#     }
+#     return render(request, 'users/update.html', context)

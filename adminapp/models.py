@@ -1,11 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
+
 
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    image=models.ImageField('profile-photo',null=True)
+    bio=models.TextField(null=True)
+    
+    
+    def _str_(self):
+        return f'{self.user.username} Profile'
+
 class Admin(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
+    prof_ref = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='projects', null=True)
     
     
     def __str__(self):
@@ -21,6 +32,7 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+
     
 
     @classmethod
