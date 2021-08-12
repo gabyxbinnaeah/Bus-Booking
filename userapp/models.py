@@ -70,6 +70,12 @@ class Book(models.Model):
     seat_no = MultiSelectField(max_length=200,null=True,choices=SEAT_OPTIONS)
     checked_seats= models.CharField(max_length=2)
 
+
+    @classmethod
+    def show_bookings(cls,email):
+        booking=cls.objects.filter(email=email)
+        return booking
+
     def __str__(self):
         return self.email
 

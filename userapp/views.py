@@ -22,7 +22,7 @@ import json
 from . mpesa_credentials import MpesaAccessToken, LipanaMpesaPpassword
 from django.views.decorators.csrf import csrf_exempt
 from .models import MpesaPayment
-from mpesa.models import Fare as Transfee
+from .models import Fare as Transfee
 from .forms import FareForm
 
 today = date.today()
@@ -69,9 +69,9 @@ def confirm_booking(request):
 
 
 def mytravels(request):
-    mytravel=Book.objects.last()
+    current_user=request.user.email
+    mytravel=Book.show_bookings(current_user)
     return render(request,'main/mytravel.html',{'mytravel':mytravel})
-
 
 # Create your views here.
 def registeruser(request):
@@ -116,30 +116,32 @@ def logout_page(request):
     logout(request) 
     return redirect('loginpage')
 
+
 def checkout(request):
-    books=Book.objects.all()
+    books=Book.objects.last()
     return render(request,'main/checkout.html',{'books':books})
 
 def update(request,pk):
-    book = Book.objects.get(pk=pk)
+    book = Book.objects.get(id=pk)
+    form=SeatsForm(instance=book)
     if request.method == 'POST':
-        form = BookForm(request.POST, instance=book)
+        form = SeatsForm(request.POST, instance=book)
         if form.is_valid():
             form.save()
-            url = reverse('index', kwargs={'pk': pk})
-            return render(request, 'index.html', {'url': url})
-        else:
-            form = BookForm(instance=book)
-    else:
-        form = BookForm(instance=book)
-    return render(request, 'update.html', {'form':form, 'book':book})
+            return redirect('mytravels')
+        
+        
+    return render(request, 'update.html', {'form':form})
+
 
 def delete_booking(request, pk):
-    book = Book.objects.get(pk=pk)
-    book.delete()
-    return render(request, 'index.html')
+	book = Book.objects.get(id=pk)
+	if request.method == "POST":
+		book.delete()
+		return redirect('mytravels')
 
-
+	context = {'book':book}
+	return render(request, 'delete.html', context)
 
 # Mpesa payment
 def seats(request):
@@ -267,3 +269,13 @@ def Fare(request):
     else:
         form = FareForm() 
     return render(request, 'newbook.html', {'form': form}) 
+
+
+def about_us(request):
+    return render(request,'about_us.html')
+
+def succes(request):
+	return render(request, "success.html")
+
+def contact_us(request):
+	return render(request, "contact_us.html")
