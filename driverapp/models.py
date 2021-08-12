@@ -47,6 +47,13 @@ class Book(models.Model):
 
     def __str__(self):
         return self.email
+
+    
+    @classmethod
+    def show_bookings(cls,email):
+        booking=cls.objects.filter(email__icontains=email)
+        return booking
+    
     
     
     

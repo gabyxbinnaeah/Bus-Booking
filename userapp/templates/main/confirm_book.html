@@ -14,8 +14,10 @@
                     name:{{seats.name}}
                     <br>
                     email:{{seats.email}}
+                    <br>
+                    fare per seat:{{seats.fare}}
                 </p>
-                <p id="seat">{{seat.seat_no|length}}</p>
+                <p id="seat"> total seats:{{seat.seat_no|length}}</p>
                 <form action="" method="POST">
 
                     {% csrf_token %}

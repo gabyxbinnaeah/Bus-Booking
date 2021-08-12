@@ -73,5 +73,11 @@ class Book(models.Model):
         return self.email
     
     
+    @classmethod
+    def show_bookings(cls,email):
+        booking=cls.objects.filter(email=email)
+        return booking
+    
+   
 
- 
+

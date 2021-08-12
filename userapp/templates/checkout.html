@@ -16,18 +16,18 @@
       </tr>
     </thead>
     <tbody>
-      {% for book in books %}
+     
       <tr >
         <th scope="row">1</th>
-        <td>{{ book.name }}</td>
-        <td>{{ book.seat_no }}</td>
-        <td>{{ book.source }}</td>
-        <td>{{ book.dest }}</td>
-        <td>{{ book.fare }}</td>
-        <td>{{ book.date }}</td>
+        <td>{{ books.name }}</td>
+        <td>{{ books.seat_no }}</td>
+        <td>{{ books.source }}</td>
+        <td>{{ books.dest }}</td>
+        <td>{{ books.fare }} per person</td>
+        <td>{{ books.date }}</td>
 
       </tr>
-      {% endfor%}
+    
   
     </tbody>
   </table>
