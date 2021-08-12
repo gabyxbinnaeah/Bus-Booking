@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container" >
+  <h1 class="text-center">My Bookings.</h1>
+
+  <table class="table" style="border: 1px solid grey; position: relative;">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Seat Number</th>
+        <th scope="col">Source</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Fare</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr >
+        <th scope="row">1</th>
+        <td>{{ book.name }}</td>
+        <td>{{ book.seat_no }}</td>
+        <td>{{ book.source }}</td>
+        <td>{{ book.dest }}</td>
+        <td>{{ book.fare }}</td>
+        <td>{{ book.date }}</td>
+
+      </tr>
+      {% endfor%}
+  
+    </tbody>
+  </table>
+   <button class="btn btn-info">Update</button>
+   <span></span>
+   <button class="btn btn-danger">Delete</button>
+
+  
+</div>
+
+{%endblock%}

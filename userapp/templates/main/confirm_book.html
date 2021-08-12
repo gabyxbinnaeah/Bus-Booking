@@ -1,0 +1,32 @@
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-body">
+
+
+                <p>Confirm you want to book seat number(s) {{seats.seat_no}}?
+                    <br>
+                    name:{{seats.name}}
+                    <br>
+                    email:{{seats.email}}
+                </p>
+                <p id="seat">{{seat.seat_no|length}}</p>
+                <form action="" method="POST">
+
+                    {% csrf_token %}
+                    <a class="btn btn-warning" href="{% url 'index' %}">Cancel</a>
+                    
+                    <a href="{% url 'checkout' %}" class="btn btn-success">
+                        Confirm
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

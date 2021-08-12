@@ -1,0 +1,229 @@
+{%extends 'base2.html'%}
+{%load bootstrap4%}
+{%block content%}
+<div class="container" style="background-color: rgba(128, 128, 128, 0.39);">
+    <section>
+        <div class="landing-nav" >
+            <!-- <div>
+              <h2>BUS TRAVELS</h2>
+            </div> -->
+            <!-- <div class="card" style="padding:0px"> </div>-->
+            <div class="card-body">
+              <ul class="nav" style="background-color: #284b63; color:white;">
+                <li class="btn btn-lg"><a href="{% url 'index'%}" style="color:white;">HOME</a></li>
+                <li class="btn btn-lg sign"><a href="{%url 'about_us'%}" style="color:white;">ABOUT US</a></li>
+                <li class="btn btn-lg sign"><a href="{%url 'register'%}" style="color:white;"> SIGNUP</a></li>
+                <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}" style="color:white;">LOGIN</a></li>
+                <li class="btn btn-lg"><a href="" style="color:white;">{{user}}</a></li>
+              </ul>
+            </div>
+            
+        </div>
+    </section>
+   
+    <div class="row reveal text-center" style="padding-top:80px;">
+        <h1 class="title">About bus booking.</h1>
+        <p class="about">Build in 2021 where most people are highly dependant on technology, bus booking will
+            allow users to
+            search
+            available
+            buses and book the one they preffer from anywhere. Drivers, on the other side will be able to update
+            buses,
+            amount of
+            fare and routes.</p>
+    </div>
+    <hr>
+    <div class="card">
+    <div class="row reveal card-body">
+        <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5 column">
+            <p class='aboutus text-right'>To enhancing the business growth of our customers with creative Design and
+                Development to deliver
+                market-defining
+                high-quality solutions that create value and consistent competitive advantage for our clients around the
+                world.</p>
+        </div>
+        <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN_4dkyOsR31hnFmtW9DhD7X8rKscyGn4XDw&usqp=CAU"
+                alt="image" width="100%" height="200px">
+        </div>
+    </div>
+    </div>
+    <hr>
+   <div class="card">
+    <div class="row reveal card-body">
+        <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
+            <img src="https://blog.gorizen.com/hubfs/Mission%20Statement%20of%20tower%20and%20flag.jpg" alt=""
+                width="100%">
+        </div>
+        <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5">
+            <p class='aboutus'>To become a prime performer, in providing quality Web, Print and Software solutions in
+                the
+                competitive
+                global market
+                place.</p>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row blog">
+        <h1 class="center mx-auto text-center py-4">Our Team Members</h1>
+
+        <div class="col-md-12">
+            <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                <ol class="invisible carousel-indicators">
+                    <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#blogCarousel" data-slide-to="1"></li>
+                </ol>
+
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Odhiambo Gabriel</h3>
+                                        <span class="post">Team Leader</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Kelvin Cheruiyot</h3>
+                                        <span class="post">Backend developer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Vivian Gichuki</h3>
+                                        <span class="post">UI/UX designer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Chepng'etich Faith</h3>
+                                        <span class="post">Frontend developer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Givondo Budds</h3>
+                                        <span class="post">Backend developer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Kiptoo Rotich</h3>
+                                        <span class="post">Frontend developer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="our-team">
+                                    <div class="pic">
+                                        <img
+                                            src="https://www.kindpng.com/picc/m/22-223941_transparent-avatar-png-male-avatar-icon-transparent-png.png">
+                                    </div>
+                                    <div class="team-content">
+                                        <h3 class="title">Yegon Johnstone</h3>
+                                        <span class="post"> Ui/UX designer</span>
+                                    </div>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="" style='color:white;'>Message</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--.row-->
+                    </div>
+                    <!--.item-->
+
+                </div>
+                <!--.carousel-inner-->
+            </div>
+            <!--.Carousel-->
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}

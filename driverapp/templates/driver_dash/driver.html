@@ -1,0 +1,44 @@
+{%  extends 'driver_dash/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-12 ">
+        <h5 class="text-center pt-3">Drivers:</h5>
+        <hr>
+        <div class="card card-body">
+            <div class="row" style="padding:20px">
+
+                <div class="col-md-4">
+                    <!-- <a href="" class="btn btn-info btn-lg">Add Driver</a> -->
+                </div>
+                <!-- <div class="col-md-2"></div> -->
+                <div class="col-md-6"></div>
+            </div>
+
+            <table class="table table-sm">
+                <tr>
+                   
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Bus Name</th>
+                </tr>
+
+                {% for bus in buss %}
+                <tr>
+                    </td>
+                    <td>{{bus.name}}</td>
+                    <td>{{bus.email}}</td>
+                    <td> {{bus.Contact}} </td>
+                    <td>{{bus.bus_name}}</td>
+                   
+
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+    {%endblock%}

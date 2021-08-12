@@ -1,0 +1,83 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<div class="container pb-5">
+    <div class="row pt-5">
+        <!-- <div class="col-md-3"></div> -->
+        <div class="col-md-6" >
+            <div class="content-section card">
+                <div class="card-body d-flex justify-content-center">
+                    <form method="POST" enctype="multipart/form-data" style="margin-right: 3%;">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4 card-title">Book Summary</legend>
+                            <div class="m-3"> {{form|crispy}}</div>
+
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Seat_no</th>
+                                    <th scope="col">Fare per seat</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                  <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{books.name}}</td>
+                                    <td>{{books.email}}</td>
+                                    <td>{{books.seat_no}}</td>
+                                    <td>{{books.fare}}</td>
+
+                                  </tr>
+                                
+                                </tbody>
+                              </table>
+
+                        </fieldset>
+                        <div class="form-group">
+                            <!-- <button class="btn btn-outline-info" type="submit">Pay</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-section card">
+                <div class="card-body d-flex justify-content-center">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4 card-title">Checkout and pay</legend>
+                            <div class="m-3"> {{form|crispy}}</div>
+
+                            <div class="form-group">
+                                <input type="text" value="Full Name">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" value="Age">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" value="Phone number">
+                            </div>
+
+                        </fieldset>
+                        <div class="form-group">
+                            <button class="btn btn-outline-info" type="submit">Pay</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-"></div>
+    </div>
+</div>
+{%endblock%}

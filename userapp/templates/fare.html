@@ -1,0 +1,35 @@
+{%load bootstrap4%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row" style="padding-top:100px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 card">
+              <div class="card-body bg-info text-center">
+                <p>Lets transfer cash effortlessly</p>
+                <p>Your phone Number is:{{new_details.phone_number}}</p>
+                <p>Your total fare is:{{new_details.fare}}</p>
+                <form action="{%url 'lipa_na_mpesa'%}" method="POST">
+                    {%csrf_token %}
+                    <input type="hidden" name="phone_number" value="{{new_details.phone_number}}">
+                    <input type="hidden" name="fare" value="{{new_details.fare}}">
+                <!-- <input type=button class="btn btn-warning"  onClick="location.href='http://127.0.0.1:8000/online/lipa'"  value='click to pay'> --> 
+                <input type="submit" class="btn btn-warning" name="hidden_details" onClick="location.href='{%url 'lipa_na_mpesa' %}' "  value='click to pay'>
+                 </form>
+              </div>
+            
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    
+</body>
+</html>
+
