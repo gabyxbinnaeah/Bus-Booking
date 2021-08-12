@@ -1,7 +1,5 @@
 from driverapp.models import Bus
-from .models import Book
-from django import forms
-    
+from .models import Book,Fare 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -37,3 +35,17 @@ class BookForm(forms.ModelForm):
     class Meta:
         model=Book
         fields=['busid','source','destination','date']
+
+
+class BusForm(forms.ModelForm):
+    class Meta:
+        model=Bus
+        fields=['source','destination','bus_name', 'date']
+
+
+
+class FareForm(forms.ModelForm):
+    class Meta:
+
+        model=Fare
+        fields=['phone_number','fare']
