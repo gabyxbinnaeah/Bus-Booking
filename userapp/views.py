@@ -1,23 +1,22 @@
 from datetime import date
+from django.http.response import HttpResponse, HttpResponseRedirect, Http404
 from decimal import Decimal
-
+from .forms import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import RequestContext
 from django.urls import reverse
 from driverapp.models import Bus
-
 from userapp.models import Book
-
+from .models import Book
+from .forms import BusForm, SeatsForm,CreateUserForm,BookForm
+from .decorators import unauthenticated,allowed_users
+from django.contrib.auth.models import Group
 
 today = date.today()
-
-from .forms import BusForm, SeatsForm,CreateUserForm,BookForm
 
 
 def index(request):
@@ -37,9 +36,11 @@ def index(request):
             messages.warning(request,"No available buses.")
     else:
         form = BusForm()
-    return render(request, 'main/index.html',{'form':form}) 
+    return render(request, 'main/index.html',{'form':form})
 
-def booking(request,id):
+@allowed_users(allowed_roles=['user'])
+@login_required(login_url='loginpage')
+def booking(request):
     form = SeatsForm()
     if request.method == 'POST':
         form = SeatsForm(request.POST)
@@ -58,12 +59,22 @@ def booking(request,id):
     }
     return render(request, 'main/booking.html', context)
 
+@allowed_users(allowed_roles=['user'])
+def mytravels(request):
+    mytravel=Book.objects.last()
+    return render(request,'main/mytravel.html',{'mytravel':mytravel})
+
+
 
 def registeruser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            
+            group=Group.objects.get('user')
+            user.groups.add(group)
+            
             messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
 
             return redirect('loginpage')
@@ -96,15 +107,30 @@ def loginpage(request):
       
     return render(request,'registration/login.html')
 
+@allowed_users(allowed_roles=['user'])
+@login_required(login_url='loginpage')
+def confirm_booking(request):
+
+    seats=Book.objects.all().latest('created_at')
+    seat=seats.__dict__
+    # seat_no=seat.count()
+    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})
+
+@allowed_users(allowed_roles=['user'])
+def mytravels(request):
+    mytravel=Book.objects.last()
+    return render(request,'main/mytravel.html',{'mytravel':mytravel})
 
 def logout_page(request):
     logout(request) 
     return redirect('loginpage')
 
+@allowed_users(allowed_roles=['user'])
 def checkout(request):
     books=Book.objects.all()
-    return render(request,'checkout.html',{'books':books})
+    return render(request,'main/checkout.html',{'books':books})
 
+@allowed_users(allowed_roles=['user'])
 def update(request,pk):
     book = Book.objects.get(pk=pk)
     if request.method == 'POST':
@@ -119,6 +145,7 @@ def update(request,pk):
         form = BookForm(instance=book)
     return render(request, 'update.html', {'form':form, 'book':book})
 
+@allowed_users(allowed_roles=['user'])
 def delete_booking(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
