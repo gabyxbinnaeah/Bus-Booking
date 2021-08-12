@@ -39,22 +39,24 @@ def index(request):
         form = BusForm()
     return render(request, 'main/index.html',{'form':form}) 
 
-def booking(request):
+def booking(request,id):
     form = SeatsForm()
     if request.method == 'POST':
         form = SeatsForm(request.POST)
         if form.is_valid():
             seat = form.cleaned_data.get('seat_no')
             form.save()
-            return redirect('confirm_booking')
+            return HttpResponseRedirect(self.request.path_info)
     else:
         form = SeatsForm()
-    return render(request, 'main/booking.html', {'form': form})
-
-def confirm_booking(request):
     seats=Book.objects.all().latest('created_at')
     seat=seats.__dict__
-    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})
+    context={
+        'form': form,
+        'seats': seats,
+        'seat': seat
+    }
+    return render(request, 'main/booking.html', context)
 
 
 def registeruser(request):
@@ -121,3 +123,9 @@ def delete_booking(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
     return render(request, 'index.html')
+
+def contact_us(request):
+    return render(request, 'contact_us.html')
+
+def aboutus(request):
+    return render(request, 'about_us.html')

@@ -11,10 +11,38 @@
                 <div style="column-count:4;">
                     {{ form }}
                 </div>
-                <input type='submit' value='submit'>
+                <button type="button" value="submit" class="btn btn-primary" data-toggle="modal"
+                    data-target="#exampleModalCenter">
+                    Submit
+                </button>
             </form>
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3"></div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLongTitle">Confirm your booking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="seat">Number of seats {{seat.seat_no|length}}</p>
+                <p>Seat number {{seats.seat_no}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="{%url 'checkout'%}"><button class="btn btn-primary">Confirm</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
