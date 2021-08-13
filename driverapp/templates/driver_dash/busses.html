@@ -7,7 +7,13 @@
             <h5 class="text-center pt-3">Available Buses:</h5>
             <hr>
             <div class="card card-body">
+                <form method="get" class="d-flex d-flex justify-content-center " >
+                    <div class=""style="font-size:30px">{{myFilter.form}}</div>
+    
+                <button class="btn btn-info p-1 m-1" type="submit">Search</button>
+              </form>
                 <div class="row" style="padding:20px">
+                    
 
                     <div class="col-md-4">
                         <a href="{%url 'create_order_bus' %}" class="btn btn-info btn-lg">Add Bus</a>

@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Admin 
 from django.shortcuts import get_object_or_404
+from .filter import OrderFilter,OrderFilterPassenger
 
 # Create your views here.
 
@@ -72,7 +73,9 @@ def index(request):
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilterPassenger(request.GET,queryset=book)
+    book = myFilter.qs
+    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
 @login_required(login_url='superapplogin')
 def busses(request):
@@ -80,7 +83,9 @@ def busses(request):
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilter(request.GET,queryset=bus)
+    bus = myFilter.qs
+    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
 
 def create_pass(request):
@@ -120,7 +125,7 @@ def create_bus(request):
         form = BusOwnerCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('busses-dash')
+            return redirect('buses-dash')
     context = {'form':form}
     return render(request,'admin_dash/create_bus_form.html',context)
 
@@ -169,3 +174,28 @@ def driver_details(request):
 def driver_route(request):
     route = Bus.objects.all()
     return render(request,'admin_dash/route.html',{'route':route})
+def search_request(request):
+    if 'query' in request.POST and request.GET['query']: 
+        search = request.GET.get('query')
+        search_buses= Bus.search_buses(search)
+        message= f'{search}'
+        context = {"message":messages,"businesses":search_buses}
+        
+        return render(request,'admin_dash/search.html',context)
+
+    else:
+        message="You haven't searched for any item"
+        return render(request,'admin_dash/search.html',{"message":message})   
+     
+def search_passengers(request):
+    if 'query' in request.GET and request.GET['query']:
+        search_term = request.GET.get("query")
+        searched_term = Bus.search_by_title(search_term)
+        message = f'{search_term}'
+        
+        return render(request, 'admin_dash/search.html',{'message':message,"articles":search_term})
+    
+    else:
+        message = "You haven't searched for any term"
+        return render(request,'admin_dash/search.html',{"message":message})   
+     

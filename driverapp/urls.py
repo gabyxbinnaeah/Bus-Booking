@@ -4,6 +4,7 @@ from django.conf.urls import url
 
 urlpatterns=[
     path('',views.home, name='drivers_dash'),
+    path('search_buses/',views.search_request,name = 'search_results'),
     path('busses-dash/',views.busses, name='busses-dash'),
     url(r'^register/$', views.registerDriver, name="driverregister"),
     url(r'^loginpage/$', views.loginPage, name="driverlogin"), 

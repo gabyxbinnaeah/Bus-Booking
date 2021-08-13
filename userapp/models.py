@@ -75,6 +75,11 @@ class Book(models.Model):
     def show_bookings(cls,email):
         booking=cls.objects.filter(email=email)
         return booking
+        
+    @classmethod
+    def search_passengers(cls,passenger):
+        search = cls.objects.filter(name__icontains=passenger)
+        return search
 
     def __str__(self):
         return self.email

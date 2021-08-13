@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Driver
 from django.shortcuts import get_object_or_404
-
+from adminapp.filter import OrderFilter
 # Create your views here.
 
 def registerDriver(request):
@@ -79,7 +79,9 @@ def busses(request):
     book= Book.objects.all()
     total_drivers = book.count()
     total_busses = bus.count()
-    return render(request, 'driver_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers})
+    myFilter = OrderFilter(request.GET,queryset=bus)
+    bus = myFilter.qs
+    return render(request, 'driver_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers, "myFilter":myFilter})
 
 
 def create_driver(request):
@@ -161,3 +163,17 @@ def driver_route(request):
 def driver_details(request):
     bus = Bus.objects.all()
     return render(request,'driver_dash/driver.html',{"buss":bus[::-1]})
+
+def search_request(request):
+    if 'query' in request.POST and request.GET['query']: 
+        search = request.GET.get('query')
+        search_business= Business.search_by_title(search)
+        messages= f'{search}'
+        context = {"message":messages,"businesses":search_businesses}
+        
+        return render(request,'driver_dash/search.html',context)
+
+    else:
+        message="You haven't searched for any item"
+        return render(request,'driver_dash/search.html',{"message":message})   
+        
