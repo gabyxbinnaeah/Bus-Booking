@@ -28,7 +28,7 @@ from .forms import FareForm
 today = date.today()
 
 
-@login_required(login_url='loginpage')
+# @login_required(login_url='loginpage')
 def index(request):
     buses = Bus.objects.all()
     if request.method == 'POST':
