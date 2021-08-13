@@ -17,5 +17,7 @@ urlpatterns=[
     path('create_order_bus/', views.add_bus, name="create_order_bus"),
     path('update_order_bus/<str:pk>/', views.update_bus, name="update_order_bus"),
     path('delete_order_bus/<str:pk>/', views.delete_bus, name="delete_order_bus"),
+    path('bus-route/', views.driver_route, name="drivers_route"),
+    path('driver/',views.driver_details, name='drivers-dash'),
 
 ]

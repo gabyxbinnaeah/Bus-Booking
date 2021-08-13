@@ -19,8 +19,16 @@ class CreatePasForm(forms.ModelForm):
         model = Driver
         fields = ['name','email','Contact']
                    
+class DateInput(forms.DateInput):
+    input_type = 'date'
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+            
 class BusOwnerCreationForm(forms.ModelForm):
-    
+    date = forms.DateField(widget=DateInput())
+    time= forms.TimeField(widget=TimeInput())
+    nos = forms.CharField(label='Number of seats')
     class Meta:
         model = Bus
-        fields = ['bus_name','fare','date','time']
+        fields = ['name','email','Contact','bus_name','fare','date','time','source','destination','nos']
+        widgets={'date' : DateInput(), 'time':TimeInput()}

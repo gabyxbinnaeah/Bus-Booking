@@ -15,16 +15,18 @@ urlpatterns=[
     path('login/', views.loginPage, name='superapplogin'), 
     path('logout/',views.logoutUser,name='logout'),
     path('contact/',views.contact,name='contact'),
-    path('create_order/', views.create_pass, name="create_order"),
-    path('update_order/<str:pk>/', views.update_pass, name="update_order"),
+    path('create_order/', views.create_pass, name="create_order_pass"),
+    path('update_order/<str:pk>/', views.update_pass, name="update_order_pass"),
     path('passenger/<str:pk_test>/', views.passenger, name="passenger"),
     path('bus/<str:pk_test>/', views.driver, name="bus"),
-    path('delete_order/<str:pk>/', views.delete_pass, name="delete_order"),
+    path('delete_order/<str:pk>/', views.delete_pass, name="delete_order_pass"),
     path('create_order_bus/', views.create_bus, name="create_order_bus"),
     path('update_order_bus/<str:pk>/', views.update_bus, name="update_order_bus"),
     path('delete_order_bus/<str:pk>/', views.delete_bus, name="delete_order_bus"),
     # url(r'admin/',views.admin, name='admin'),
     url(r'^register/$', views.registerPage, name="adminregister"),
+    path('driver/',views.driver_details, name='driver-dash'),
+   
    
 
 ]

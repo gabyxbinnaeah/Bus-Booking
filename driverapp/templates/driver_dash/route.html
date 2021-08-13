@@ -5,7 +5,7 @@
 <div class="row">
 
     <div class="col-md-12 ">
-        <h5 class="text-center pt-3">Drivers:</h5>
+        <h5 class="text-center pt-3">Routes:</h5>
         <hr>
         <div class="card card-body">
             <div class="row" style="padding:20px">
@@ -19,20 +19,24 @@
 
             <table class="table table-sm">
                 <tr>
-                   
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Contact</th>
                     <th>Bus Name</th>
+                    <th>Source</th>
+                    <th>Destination</th>
+                    <th>Fare</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                   
                 </tr>
 
-                {% for bus in buss %}
+                {% for routes in route %}
                 <tr>
                     </td>
-                    <td>{{bus.name}}</td>
-                    <td>{{bus.email}}</td>
-                    <td> {{bus.Contact}} </td>
-                    <td>{{bus.bus_name}}</td>
+                    <td>{{routes.bus_name}}</td>
+                    <td>{{routes.source}}</td>
+                    <td> {{routes.destination}} </td>
+                    <td>{{routes.fare}}</td>
+                    <td>{{routes.date}}</td>
+                    <td>{{routes.time}}</td>
                    
 
                 </tr>

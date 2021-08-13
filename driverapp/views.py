@@ -132,7 +132,7 @@ def update_bus(request,pk):
             form.save()
             return redirect('busses-dash')
     context={'form':form}
-    return render(request,'driver_dash/create_bus_form.html'.context)
+    return render(request,'driver_dash/create_bus_form.html',context)
 
 def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)
@@ -151,3 +151,13 @@ def driver(request,pk_test):
     
     context={'driver':driver}
     return render(request,'driver_dash/individual_driver.html',context)
+
+
+def driver_route(request):
+    route = Bus.objects.all()
+    return render(request,'driver_dash/route.html',{'route':route})
+
+
+def driver_details(request):
+    bus = Bus.objects.all()
+    return render(request,'driver_dash/driver.html',{"buss":bus[::-1]})
