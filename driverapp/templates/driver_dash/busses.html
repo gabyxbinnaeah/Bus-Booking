@@ -18,8 +18,12 @@
 
                 <table class="table table-sm" style="color:black">
                     <tr>
+                        <th>Driver</th>
+                        <th>Email</th>
+                        <th>Contact</th>
                         <th>Bus Name</th>
-                        <th>Dest</th>
+                        <th>Source</th>
+                        <th>Destination</th>
                         <th>Nos</th>
                         <th>Date</th>
                         <th>Fare</th>
@@ -28,8 +32,12 @@
 
                     {% for order in bus %}
                     <tr>
+                        <td>{{order.name}}</td>
+                        <td>{{order.email}}</td>
+                        <td>{{order.Contact}}</td>
                         <td>{{order.bus_name}}</td>
-                        <td>{{order.dest}}</td>
+                        <td>{{order.source}} </td>
+                        <td>{{order.destination}}</td>
                         <td>{{order.nos}}</td>
                         <td>{{order.date}}</td>
                         <td>{{order.fare}}</td>

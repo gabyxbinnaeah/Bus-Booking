@@ -4,17 +4,18 @@
 {%load static%}
 
 {%block content%}
+<div class="container">
 <div class="body">
   <div class="landing-nav">
     <div>
-      <h2>BUS TRAVELS</h2>
+      <h2>EAZY TRAVELS</h2>
     </div>
     <div>
-      <ul class="nav">
-        <li class="btn btn-lg"><a href="">HOME</a></li>
-        <li class="btn btn-lg sign"><a href="{%url 'register'%}">SIGNUP</a></li>
-        <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}">LOGIN</a></li>
-        <li class="btn btn-lg"><a href="">{{user}}</a></li>
+      <ul class="nav" >
+        <li class="btn btn-lg" ><a href="" >HOME</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'about_us'%}">ABOUT US</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'contact'%}">CONTACT</a></li>
+        <!-- <li class="btn btn-lg"><a href="">{{user}}</a></li> -->
       </ul>
     </div>
   </div>
@@ -25,7 +26,7 @@
           {% csrf_token %}
           <div>{% bootstrap_form form %}</div>
           <div class="form-group">
-            <input type="submit" class="btn btn-md submit" id="submit" value="SUBMIT">
+            <input type="submit" class="btn btn-md submit" id="submit" value="SUBMIT" style="background-color: #284b63;color:white;">
           </div>
           <input type="hidden" name="next" value="{{next}}">
         </form>
@@ -34,8 +35,10 @@
     </div>
   </div>
 </div>
-<button class="btn btn-lg available_buses">AVAILABLE BUSES</button>
-<div class="container" id="results">
+<div class="available_buses card-body text-center" style="background-color:#284b63;height:70px;padding-bottom:20px;">AVAILABLE BUSES</div>
+ 
+<div class="card" style="padding-top:20px;border:2px solid #284b63;">
+<div class="container card-body row" id="results">
   {% include 'main/includes/messages.html' %}
   <table id="booking_table ">
     <tr>
@@ -52,12 +55,111 @@
       <td>{{bus.destination}}</td>
       <td>sh.{{bus.fare}}</td>
       <td>{{bus.date}}</td>
-      <td><a href="{% url 'booking' %}"><button class="btn btn-md book_button float-right">BOOK NOW</button></a>
+      <td><a href="{% url 'booking' %}"><button class="btn btn-md book_button float-right" style="background-color: #284b63;color: #fff;">BOOK NOW</button></a>
       </td>
     </tr>
     {%endfor%}
   </table>
 </div>
+<<<<<<< HEAD
+=======
+</div>
+
+<div class="row" style="padding-top:20px">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <section id="team" class="card" style="box-shadow: 5px 10px;"> 
+      <div class="container ">
+          <div class="row justify-content-center">
+              <div class="col-md-6">
+                <h2>Our Happy Customers</h2>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-3 col-md-6">
+                  <div class="member">
+                    <div class="member-img">
+                        <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t4.jpg" class="img-fluid" alt="">
+                    </div>
+                      <div class="member-info">
+                          <h4>Emma White</h4>
+                          <span>Web Designer</span>
+                          <div class="social-links">
+                              <a href="#"><i class="fab fa-facebook-f"></i></a>
+                              <a href="#"><i class="fab fa-twitter"></i></a>
+                              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                              <a href="#"><i class="fab fa-instagram"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                  <div class="member">
+                    <div class="member-img">
+                        <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t3.jpg" class="img-fluid" alt="">
+                    </div>
+                      <div class="member-info">
+                          <h4>Bobby Robins</h4>
+                          <span>Web Developer</span>
+                          <div class="social-links">
+                              <a href="#"><i class="fab fa-facebook-f"></i></a>
+                              <a href="#"><i class="fab fa-twitter"></i></a>
+                              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                              <a href="#"><i class="fab fa-instagram"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                  <div class="member">
+                    <div class="member-img">
+                        <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t2.jpg" class="img-fluid" alt="">
+                    </div>
+                      <div class="member-info">
+                          <h4>Gena lee</h4>
+                          <span>SEO Expert</span>
+                          <div class="social-links">
+                              <a href="#"><i class="fab fa-facebook-f"></i></a>
+                              <a href="#"><i class="fab fa-twitter"></i></a>
+                              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                              <a href="#"><i class="fab fa-instagram"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6">
+                  <div class="member">
+                    <div class="member-img">
+                        <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/team/t1.jpg" class="img-fluid" alt="">
+                    </div>
+                      <div class="member-info">
+                          <h4>Noel Flantier</h4>
+                          <span>ISO Developer</span>
+                          <div class="social-links">
+                              <a href="#"><i class="fab fa-facebook-f"></i></a>
+                              <a href="#"><i class="fab fa-twitter"></i></a>
+                              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                              <a href="#"><i class="fab fa-instagram"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+</div>
+
+>>>>>>> cf514998f812ec59140fdb8f2ca54b7c1cf51862
 
 
 {%endblock %}
