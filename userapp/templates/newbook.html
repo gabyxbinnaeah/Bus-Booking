@@ -54,7 +54,7 @@
             .btn {
                 margin-top: 36px;
                 margin-bottom: 45px;
-                background-color: #AB47BC;
+                background-color: #284b63;
                 border: none;
                 color: #fff
             }
@@ -74,6 +74,9 @@
 </head>
 <body>
     <div class='container mx-auto mt-5 col-md-10 mt-100'>
+        <div class="">
+            <a href="{% url 'index'%}" class="btn btn-outline-info btn-md">Home Page</a>
+        </div>
         <div class="header">
             <div class="title">Effortlessly Pay Your Fare</div>
             <p><small class="text-muted">Lipa Na Mpesa</p>
@@ -109,7 +112,7 @@
                                     <input type="number" name="fare" id="fare">
                                 </div>
             
-                                <button type="submit" name="fare_details">Submit</button>
+                                <button type="submit"  class="btn btn-outline-info  btn-md"  name="fare_details">Submit</button>
                             </form>
                         </div>
                     </div>

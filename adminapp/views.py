@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Admin 
 from django.shortcuts import get_object_or_404
+from userapp.decorators import unauthenticated,allowed_users
+from .filter import OrderFilterPassenger, OrderFilter
 
 # Create your views here.
 
@@ -61,26 +63,30 @@ def logoutUser(request):
 # def admin(request):
 #     return render(request, 'adminapp/index.html') 
 
-@login_required(login_url='superapplogin') 
+
 def contact(request):
 	return render(request, 'adminapp/contact.html')
 
-@login_required(login_url='superapplogin')
+@allowed_users(allowed_roles=['admin'])
 def index(request):
 
     bus = Bus.objects.all()
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilterPassenger(request.GET,queryset=book)
+    book = myFilter.qs
+    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
-@login_required(login_url='superapplogin')
+@allowed_users(allowed_roles=['admin'])
 def busses(request):
     bus = Bus.objects.all()
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilter(request.GET,queryset=bus)
+    bus = myFilter.qs
+    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
 
 def create_pass(request):

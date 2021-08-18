@@ -8,6 +8,17 @@ class Driver(models.Model):
     email = models.EmailField()
     Contact = models.CharField(max_length=10)
     
+
+    def save_driver(self):
+        self.save()
+
+    def delete_driver(self):
+        self.delete()
+    
+    @classmethod
+    def update_driver(self):
+        driver=Driver.objects.get_or_create()
+        return driver
     
     def _str_(self):
         return self.email  
@@ -34,6 +45,17 @@ class Bus(models.Model):
     def bus_details(cls):
         bus_details_list=cls.objects.all()
         return bus_details_list 
+
+    def save_bus(self):
+        self.save()
+
+    def delete_bus(self):
+        self.delete()
+    
+    @classmethod
+    def update_bus(self):
+        bus=Bus.objects.get_or_create()
+        return bus
 
 
     def _str_(self):

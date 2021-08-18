@@ -71,10 +71,21 @@ class Book(models.Model):
     checked_seats= models.CharField(max_length=2)
 
 
+
     @classmethod
     def show_bookings(cls,email):
         booking=cls.objects.filter(email=email)
         return booking
+    def save_booking(self):
+        self.save()
+
+    def delete_booking(self):
+        self.delete()
+
+    @classmethod
+    def update_booking(self):
+        book=Book.objects.get_or_create()
+        return book
 
     def __str__(self):
         return self.email
@@ -86,6 +97,9 @@ class BaseModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     class Meta:
         abstract = True
+
+    def save_date(self):
+        self.save()
         
 # M-pesa Payment models
 class MpesaCalls(BaseModel):
@@ -96,6 +110,9 @@ class MpesaCalls(BaseModel):
     class Meta:
         verbose_name = 'Mpesa Call'
         verbose_name_plural = 'Mpesa Calls'
+
+    def save_date(self):
+        self.save()
 class MpesaCallBacks(BaseModel):
     ip_address = models.TextField()
     caller = models.TextField()
@@ -104,6 +121,10 @@ class MpesaCallBacks(BaseModel):
     class Meta:
         verbose_name = 'Mpesa Call Back'
         verbose_name_plural = 'Mpesa Call Backs'
+
+    def save_date(self):
+        self.save()
+
 class MpesaPayment(BaseModel):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
@@ -119,6 +140,9 @@ class MpesaPayment(BaseModel):
         verbose_name_plural = 'Mpesa Payments'
     def __str__(self):
         return self.first_name
+
+    def save_date(self):
+        self.save()
 
 class  Fare(models.Model):
     phone_number=models.IntegerField() 

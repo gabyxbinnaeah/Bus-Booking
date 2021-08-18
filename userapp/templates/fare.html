@@ -34,8 +34,8 @@
             }
 
             .profile img {
-                width: 68px;
-                height: 68px;
+                width: 80px;
+                height: 80px;
                 border-radius: 50%
             }
 
@@ -54,7 +54,7 @@
             .btn {
                 margin-top: 36px;
                 margin-bottom: 45px;
-                background-color: #AB47BC;
+                background-color: #284b63;
                 border: none;
                 color: #fff
             }
@@ -74,6 +74,9 @@
 </head>
 <body>
     <div class='container mx-auto mt-5 col-md-10 mt-100'>
+        <div class="">
+            <a href="{% url 'faredetails'%}" class="btn btn-outline-info btn-md"> Cancel Payment</a>
+        </div>
         <div class="header">
             <div class="title">Effortlessly Pay Your Fare</div>
             <p><small class="text-muted">Lipa Na Mpesa</p>
@@ -97,7 +100,7 @@
                                     <input type="hidden" name="phone_number" value="{{new_details.phone_number}}">
                                     <input type="hidden" name="fare" value="{{new_details.fare}}">
                                 <!-- <input type=button class="btn btn-warning"  onClick="location.href='http://127.0.0.1:8000/online/lipa'"  value='click to pay'> --> 
-                                <input type="submit" class="btn btn-warning" name="hidden_details" onClick="location.href='{%url 'lipa_na_mpesa' %}' "  value='click to pay'>
+                                <input type="submit" class="btn btn-warning" name="hidden_details" onClick="location.href='{%url 'lipa_na_mpesa' %}'"  value='click to pay'>
                                  </form>
                               </div>
                         </div>

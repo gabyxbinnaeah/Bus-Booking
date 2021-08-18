@@ -6,7 +6,17 @@ class Admin(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
+
+    def save_admin(self):
+        self.save()
+
+    def delete_admin(self):
+        self.delete()
     
+    @classmethod
+    def update_admin(self):
+        admin=Admin.objects.get_or_create()
+        return admin
     
     def __str__(self):
         return self.email  
@@ -23,11 +33,21 @@ class Bus(models.Model):
     time = models.TimeField()
     
 
+    def save_bus(self):
+        self.save()
+
+    def delete_bus(self):
+        self.delete()
+    
+    @classmethod
+    def update_bus(self):
+        bus=Bus.objects.get_or_create()
+        return bus
+
     @classmethod
     def bus_details(cls):
         bus_details_list=cls.objects.all()
         return bus_details_list 
-
 
     def __str__(self):
         return self.bus_name
@@ -54,4 +74,15 @@ class Book(models.Model):
 
     def __str__(self):
         return self.email
+
+    def save_booking(self):
+        self.save()
+
+    def delete_booking(self):
+        self.delete()
+
+    @classmethod
+    def update_booking(self):
+        book=Book.objects.get_or_create()
+        return book
 

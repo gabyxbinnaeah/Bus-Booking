@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Driver
 from django.shortcuts import get_object_or_404
+from userapp.decorators import unauthenticated,allowed_users
 
 # Create your views here.
 
@@ -64,7 +65,7 @@ def logoutDriver(request):
 # def admin(request):
 #     return render(request, 'driver/home.html') 
 
-@login_required(login_url='driverlogin')
+@allowed_users(allowed_roles=['driver','admin'])
 def home(request):
 
     bus = Bus.objects.all()
@@ -73,7 +74,7 @@ def home(request):
     total_busses = bus.count()
     return render(request, 'driver_dash/driver.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers})
 
-@login_required(login_url='driverlogin')
+@allowed_users(allowed_roles=['driver','admin'])
 def busses(request):
     bus = Bus.objects.all()
     book= Book.objects.all()
@@ -81,7 +82,7 @@ def busses(request):
     total_busses = bus.count()
     return render(request, 'driver_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_drivers':total_drivers})
 
-
+@allowed_users(allowed_roles=['driver','admin'])
 def create_driver(request):
     form = CreatePasForm()
     if request.method == 'POST':
@@ -91,7 +92,7 @@ def create_driver(request):
             return redirect('drivers_dash')
     context = {'form':form}
     return render(request,'driver_dash/create_form.html',context)
-
+@allowed_users(allowed_roles=['driver','admin'])
 def update_driver(request,pk):
     order = Book.objects.get(id=pk)
     form = CreatePasForm(instance=order)
@@ -102,7 +103,7 @@ def update_driver(request,pk):
             return redirect('drivers_dash')
     context={'form':form}
     return render(request,'driver_dash/create_form.html',context)
-
+@allowed_users(allowed_roles=['driver','admin'])
 def delete_driver(request, pk):
 	order = Book.objects.get(id=pk)
 	if request.method == "POST":
@@ -112,7 +113,7 @@ def delete_driver(request, pk):
 	context = {'item':order}
 	return render(request, 'driver_dash/delete.html', context)
 
-
+@allowed_users(allowed_roles=['driver','admin'])
 def add_bus(request):
     form = BusOwnerCreationForm()
     if request.method == 'POST':
@@ -122,7 +123,7 @@ def add_bus(request):
             return redirect('busses-dash')
     context = {'form':form}
     return render(request,'driver_dash/create_bus_form.html',context)
-
+@allowed_users(allowed_roles=['driver','admin'])
 def update_bus(request,pk):
     bus = Bus.objects.get(id=pk)
     form = BusOwnerCreationForm(instance=bus)
@@ -133,7 +134,7 @@ def update_bus(request,pk):
             return redirect('busses-dash')
     context={'form':form}
     return render(request,'driver_dash/create_bus_form.html',context)
-
+@allowed_users(allowed_roles=['driver','admin'])
 def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)
 	if request.method == "POST":
@@ -142,7 +143,7 @@ def delete_bus(request, pk):
 
 	context = {'item':order}
 	return render(request, 'driver_dash/delete_bus.html', context)
-
+@allowed_users(allowed_roles=['driver','admin'])
 def driver(request,pk_test):
     try:
         driver = Driver.objects.get(id=pk_test)

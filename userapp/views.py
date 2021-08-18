@@ -24,61 +24,20 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import MpesaPayment
 from .models import Fare as Transfee
 from .forms import FareForm
-
+from .decorators import unauthenticated,allowed_users
+from django.contrib.auth.models import Group
 today = date.today()
 
-
-# @login_required(login_url='loginpage')
-def index(request):
-    buses = Bus.objects.all()
-    if request.method == 'POST':
-        form=BusForm(request.POST,request.FILES)
-        if form.is_valid():
-            source=form.cleaned_data['source']
-            destination=form.cleaned_data['destination']
-            search_bus=Bus.search_buses(source,destination)
-            if search_bus:
-                messages.success(request, 'Found some buses for you')
-            else:
-                messages.error(request, 'Oops! No buses found from your search.')
-            return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
-        else:
-            messages.warning(request,"No available buses.")
-    else:
-        form = BusForm()
-    return render(request, 'main/index.html',{'form':form}) 
-@login_required(login_url='loginpage')
-def booking(request):
-    form = SeatsForm()
-    if request.method == 'POST':
-        form = SeatsForm(request.POST)
-        if form.is_valid():
-            seat = form.cleaned_data.get('seat_no')
-            form.save()
-            return redirect('confirm_booking')
-    else:
-        form = SeatsForm()
-    return render(request, 'main/booking.html', {'form': form})
-@login_required(login_url='loginpage')
-def confirm_booking(request):
-
-    seats=Book.objects.all().latest('created_at')
-    seat=seats.__dict__
-    # seat_no=seat.count()
-    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})
-
-
-def mytravels(request):
-    current_user=request.user.email
-    mytravel=Book.show_bookings(current_user)
-    return render(request,'main/mytravel.html',{'mytravel':mytravel})
 
 # Create your views here.
 def registeruser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save()
+            group=Group.objects.get(name='user')
+            group.user_set.add(user)
+            # user.groups.add(group)
             messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
 
             return redirect('loginpage')
@@ -117,10 +76,61 @@ def logout_page(request):
     return redirect('loginpage')
 
 
+
+# @login_required(login_url='loginpage')
+def index(request):
+    buses = Bus.objects.all()
+    if request.method == 'POST':
+        form=BusForm(request.POST,request.FILES)
+        if form.is_valid():
+            source=form.cleaned_data['source']
+            destination=form.cleaned_data['destination']
+            search_bus=Bus.search_buses(source,destination)
+            if search_bus:
+                messages.success(request, 'Found some buses for you')
+            else:
+                messages.error(request, 'Oops! No buses found from your search.')
+            return render(request, 'main/index.html',{'form':form,"buses":search_bus}) 
+        else:
+            messages.warning(request,"No available buses.")
+    else:
+        form = BusForm()
+    return render(request, 'main/index.html',{'form':form}) 
+
+@login_required(login_url='loginpage')
+@allowed_users(allowed_roles=['user','admin','driver']) 
+def booking(request):
+    form = SeatsForm()
+    if request.method == 'POST':
+        form = SeatsForm(request.POST)
+        if form.is_valid():
+            seat = form.cleaned_data.get('seat_no')
+            form.save()
+            return redirect('confirm_booking')
+    else:
+        form = SeatsForm()
+    return render(request, 'main/booking.html', {'form': form})
+@login_required(login_url='loginpage')
+def confirm_booking(request):
+
+    seats=Book.objects.all().latest('created_at')
+    seat=seats.__dict__
+    # seat_no=seat.count()
+    return render(request, 'main/confirm_book.html', {'seats': seats,'seat': seat})
+
+
+def mytravels(request):
+    current_user=request.user.email
+    mytravel=Book.show_bookings(current_user)
+    return render(request,'main/mytravel.html',{'mytravel':mytravel})
+
+
+
+@allowed_users(allowed_roles=['user','driver','admin'])
 def checkout(request):
     books=Book.objects.last()
     return render(request,'main/checkout.html',{'books':books})
-
+@allowed_users(allowed_roles=['user'])
 def update(request,pk):
     book = Book.objects.get(id=pk)
     form=SeatsForm(instance=book)
@@ -133,7 +143,7 @@ def update(request,pk):
         
     return render(request, 'update.html', {'form':form})
 
-
+@allowed_users(allowed_roles=['user'])
 def delete_booking(request, pk):
 	book = Book.objects.get(id=pk)
 	if request.method == "POST":

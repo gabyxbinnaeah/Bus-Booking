@@ -6,50 +6,64 @@
 		<div class="col-md-12">
 			<h5 class="text-center pt-3">Bus Owners:</h5>
 			<hr>
-			<div class="card card-body">
-				<div class="row" style="padding:20px">
-							
-					<div class="col-md-4">
-						<a href="{%url 'create_order_bus-' %}" class="btn btn-info btn-lg">Add Bus</a>
+			<div class="card">
+				<div class="card card-body">
+					<div class="col-sm-12">
+						<form method="get" class="d-flex d-flex justify-content-center " >
+							<div class=""style="font-size:30px">{{myFilter.form}}</div>
+			
+						<button class="btn btn-info p-1 m-1" type="submit">Search</button>
+						</form>
 					</div>
-					<div class="col-md-2"></div>
-					<div class="col-md-6"></div>
+					
+					<div class="row" style="padding:20px">
+						
+	
+						<div class="col-md-4">
+							<a href="{%url 'create_order_bus' %}" class="btn btn-info btn-lg">Add Bus</a>
+						</div>
+						<div class="col-md-2"></div>
+						<div class="col-md-6"></div>
+					</div>
+	
+					<table class="table table-sm" style="color:black">
+						<tr>
+							<th>Driver</th>
+							<th>Email</th>
+							<th>Contact</th>
+							<th>Bus Name</th>
+							<th>Source</th>
+							<th>Destination</th>
+							<th>Nos</th>
+							<th>Date</th>
+							<th>Fare</th>
+							<th>Time</th>
+						</tr>
+	
+						{% for order in bus %}
+						<tr>
+							<td>{{order.name}}</td>
+							<td>{{order.email}}</td>
+							<td>{{order.Contact}}</td>
+							<td>{{order.bus_name}}</td>
+							<td>{{order.source}} </td>
+							<td>{{order.destination}}</td>
+							<td>{{order.nos}}</td>
+							<td>{{order.date}}</td>
+							<td>{{order.fare}}</td>
+							<td>{{order.time}}</td>
+							<td><a class="btn btn-sm btn-info" href="{% url 'update_order_bus' order.id %}">Update</a></td>
+	
+							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_bus' order.id %}">Delete</a>
+							</td>
+	
+						</tr>
+						{% endfor %}
+	
+	
+					</table>
 				</div>
-
-				<table class="table table-sm" style="color:black">
-					<tr>
-						<th></th>
-						<th>Driver</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-						<th>Bus Name</th>
-						<th>Date</th>
-						<th>Fare</th>
-						<th>Time</th>
-					</tr>
-
-					{% for order in bus %}
-					<tr >
-						<td><a class="btn btn-sm btn-info" href="{% url 'bus-' order.id %}">View</a></td>
-						<td>{{order.name}}</td>
-                        <td>{{order.email}}</td>
-                        <td>{{order.Contact}}</td>
-						<td>{{order.bus_name}}</td>					
-						<td> {{order.date}} </td>
-						<td> {{order.fare}} </td>
-						<td> {{order.time}} </td>
-						<td><a class="btn btn-sm btn-info" href="{% url 'update_order_bus-' order.id %}">Update</a></td>
-
-						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_bus-' order.id %}">Delete</a>
-						</td>
-
-					</tr>
-					{% endfor %}
-
-
-				</table>
 			</div>
-		</div>
 
 	</div>
 </div>

@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'compressor',
     'sass_processor',
     'multiselectfield',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
