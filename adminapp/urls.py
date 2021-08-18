@@ -25,6 +25,7 @@ urlpatterns=[
     path('delete_order_bus/<str:pk>/', views.delete_bus, name="delete_order_bus"),
     # url(r'admin/',views.admin, name='admin'),
     url(r'^register/$', views.registerPage, name="adminregister"),
+#    path('profile/', views.profile, name='profile'),
     path('driver/',views.driver_details, name='driver-dash'),
    
    

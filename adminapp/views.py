@@ -5,11 +5,11 @@ from .forms import CreatePasForm,BusOwnerCreationForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm 
+from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Admin 
+from .models import Admin
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
