@@ -5,10 +5,10 @@ from django_filters import DateFilter, CharFilter
 
 
 class OrderFilter(django_filters.FilterSet):
-    name=CharFilter(label= 'Drivers name')
+    # name=CharFilter(label= 'Drivers name')
     class Meta:
         model = Bus
-        fields = ['bus_name' ,'source','destination','name']
+        fields = ['bus_name' ,'source','destination']
         
 class OrderFilterPassenger(django_filters.FilterSet):
     

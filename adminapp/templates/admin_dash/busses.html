@@ -52,9 +52,9 @@
 							<td>{{order.date}}</td>
 							<td>{{order.fare}}</td>
 							<td>{{order.time}}</td>
-							<td><a class="btn btn-sm btn-info" href="{% url 'update_order_bus' order.id %}">Update</a></td>
+							<td><a class="btn btn-sm btn-info" href="{% url 'update_order_bus-' order.id %}">Update</a></td>
 	
-							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_bus' order.id %}">Delete</a>
+							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_bus-' order.id %}">Delete</a>
 							</td>
 	
 						</tr>

@@ -8,12 +8,12 @@
 		<div class="card card-body">
 
 
-			<p>Are you sure you want to delete "{{item}}"?</p>
+			<p>Are you sure you want to delete {{item.bus_name}}?</p>
 
 			<form action="{% url 'delete_order_bus' item.id  %}" method="POST">
 				
 				{% csrf_token %}
-				<a class="btn btn-warning" href="{% url 'busses-dash' %}">Cancel</a>
+				<a class="btn btn-warning" href="{% url 'buses-dash' %}">Cancel</a>
 
 				<input class="btn btn-danger" type="submit" name="Confirm">
 			</form>

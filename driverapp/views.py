@@ -92,7 +92,8 @@ def create_driver(request):
             return redirect('drivers_dash')
     context = {'form':form}
     return render(request,'driver_dash/create_form.html',context)
-@allowed_users(allowed_roles=['driver','admin'])
+
+
 def update_driver(request,pk):
     order = Book.objects.get(id=pk)
     form = CreatePasForm(instance=order)
@@ -100,9 +101,10 @@ def update_driver(request,pk):
         form = CreatePasForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
-            return redirect('drivers_dash')
+            return redirect('busses-dash')
     context={'form':form}
     return render(request,'driver_dash/create_form.html',context)
+
 @allowed_users(allowed_roles=['driver','admin'])
 def delete_driver(request, pk):
 	order = Book.objects.get(id=pk)

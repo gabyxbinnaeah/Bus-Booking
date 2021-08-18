@@ -14,7 +14,7 @@ urlpatterns=[
     path('delete/<str:pk>',views.delete_booking, name='delete_booking'),
     path('update/<str:pk>',views.update, name='update'),
     path('succes/',views.succes, name='succes'),
-    path('contact', views.contact_us, name="contact"),
+    path('contact', views.contact_us, name="contact1"),
     # path('userapp/',views.index, name='user'),
     # path('accounts', views.login, name='login'),
 

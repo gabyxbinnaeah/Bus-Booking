@@ -1,68 +1,82 @@
-{%extends 'base2.html'%}
+{% extends 'base4.html'%}
 {%load bootstrap4%}
 {%block content%}
-<div class="container" style="background-color: rgba(128, 128, 128, 0.39);">
-    <section>
-        <div class="landing-nav" >
-            <!-- <div>
-              <h2>BUS TRAVELS</h2>
-            </div> -->
-            <!-- <div class="card" style="padding:0px"> </div>-->
-            <div class="card-body">
-              <ul class="nav" style="background-color: #284b63; color:white;">
-                <li class="btn btn-lg"><a href="{% url 'index'%}" style="color:white;">HOME</a></li>
-                <li class="btn btn-lg sign"><a href="{%url 'about_us'%}" style="color:white;">ABOUT US</a></li>
-                <li class="btn btn-lg sign"><a href="{%url 'register'%}" style="color:white;"> SIGNUP</a></li>
-                <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}" style="color:white;">LOGIN</a></li>
-                <li class="btn btn-lg"><a href="" style="color:white;">{{user}}</a></li>
-              </ul>
+
+<div class="container card">
+
+    <div class="container" style="margin-left: 50% auto;">
+        <div class="row reveal text-center" style="padding-top:80px;">
+            <h1 class="title" style="margin-left: 30%;">About bus booking.</h1>
+            <p class="about">Build in 2021 where most people are highly dependant on technology, bus booking will
+                allow users to
+                search
+                available
+                buses and book the one they preffer from anywhere. Drivers, on the other side will be able to update
+                buses,
+                amount of
+                fare and routes.</p>
+        </div>
+    </div>
+    <hr>
+    <div class="cardss">
+        <div class="row reveal card-body">
+            <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5 column">
+                <div class="card" style="width: 25rem;">
+                    <div class="card-body">
+                        <p class="card-text">
+                            To enhancing the business growth of our customers with creative Design and
+                            Development to deliver
+                            market-defining
+                            high-quality solutions that create value and consistent competitive advantage for our
+                            clients around
+                            the
+                            world.
+                        </p>
+                    </div>
+                </div>
+
             </div>
-            
+            <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
+                <div class="card" style="width: 22rem; margin-left: 20%; width: 100%;">
+                    <img class="card-img-top"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN_4dkyOsR31hnFmtW9DhD7X8rKscyGn4XDw&usqp=CAU"
+                        alt="Card image cap">
+
+                </div>
+
+            </div>
         </div>
-    </section>
-   
-    <div class="row reveal text-center" style="padding-top:80px;">
-        <h1 class="title">About bus booking.</h1>
-        <p class="about">Build in 2021 where most people are highly dependant on technology, bus booking will
-            allow users to
-            search
-            available
-            buses and book the one they preffer from anywhere. Drivers, on the other side will be able to update
-            buses,
-            amount of
-            fare and routes.</p>
-    </div>
-    <hr>
-    <div class="card">
-    <div class="row reveal card-body">
-        <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5 column">
-            <p class='aboutus text-right'>To enhancing the business growth of our customers with creative Design and
-                Development to deliver
-                market-defining
-                high-quality solutions that create value and consistent competitive advantage for our clients around the
-                world.</p>
+
+        <hr>
+
+        <div class="row reveal card-body">
+            <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
+                <div class="card" style="width: 28rem;">
+                    <img class="card-img-top"
+                        src="https://blog.gorizen.com/hubfs/Mission%20Statement%20of%20tower%20and%20flag.jpg"
+                        alt="Card image cap">
+
+                </div>
+                
+            </div>
+            <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5">
+
+                <div class="card" style="width: 25rem; margin-left: 20%;">
+                    <div class="card-body">
+                        <p class="card-text">
+                            To become a prime performer, in providing quality Web, Print and Software
+                            solutions
+                            in
+                            the
+                            competitive
+                            global market
+                            place.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN_4dkyOsR31hnFmtW9DhD7X8rKscyGn4XDw&usqp=CAU"
-                alt="image" width="100%" height="200px">
-        </div>
-    </div>
-    </div>
-    <hr>
-   <div class="card">
-    <div class="row reveal card-body">
-        <div class="col-xm-7 col-sm-8 col-md-7 col-lg-5">
-            <img src="https://blog.gorizen.com/hubfs/Mission%20Statement%20of%20tower%20and%20flag.jpg" alt=""
-                width="100%">
-        </div>
-        <div class="col-xm-6 col-sm-5 col-md-5 col-lg-5">
-            <p class='aboutus'>To become a prime performer, in providing quality Web, Print and Software solutions in
-                the
-                competitive
-                global market
-                place.</p>
-        </div>
-    </div>
+
     </div>
 </div>
 <div class="container">

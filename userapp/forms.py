@@ -38,6 +38,9 @@ class BookForm(forms.ModelForm):
 
 
 class BusForm(forms.ModelForm):
+    source =forms.CharField(label = "From")
+    destination =forms.CharField(label = "To")
+
     class Meta:
         model=Bus
         fields=['source','destination','bus_name', 'date']

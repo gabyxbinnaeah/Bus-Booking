@@ -28,6 +28,8 @@ class BusOwnerCreationForm(forms.ModelForm):
     date = forms.DateField(widget=DateInput())
     time= forms.TimeField(widget=TimeInput())
     nos = forms.CharField(label='Number of seats')
+    source =forms.CharField(label = "From")
+    destination =forms.CharField(label = "To")
     class Meta:
         model = Bus
         fields = ['name','email','Contact','bus_name','fare','date','time','source','destination','nos']

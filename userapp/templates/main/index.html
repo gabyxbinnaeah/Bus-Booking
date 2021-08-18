@@ -4,7 +4,7 @@
 {%load static%}
 
 {%block content%}
-<div class="container">
+
 <div class="body">
   <div class="landing-nav">
     <div>
@@ -14,11 +14,11 @@
       <ul class="nav" >
         <!-- <li class="btn btn-lg" ><a href="" >HOME</a></li> -->
         <li class="btn btn-lg sign"><a href="{%url 'about_us'%}">ABOUT US</a></li>
-        <li class="btn btn-lg sign"><a href="{%url 'contact'%}">CONTACT</a></li>
+        <li class="btn btn-lg sign"><a href="{%url 'contact1' %}">CONTACT</a></li>
         <!-- <li class="btn btn-lg"><a href="">{{user}}</a></li> -->
         <div class="dropdown show" style="padding-right: 30px;">
           <button class="btn btn-info dropdown-toggle btn-md" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sign in As
+            {{user}}
           </button>
         
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="padding-right:40px;">
@@ -49,9 +49,12 @@
     </div>
   </div>
 </div>
+
+
 <div class="available_buses card-body text-center" style="background-color:#284b63;height:70px;padding-bottom:20px;">AVAILABLE BUSES</div>
  
-<div class="card" style="padding-top:20px;border:2px solid #284b63;">
+<div class="container">
+<div class="card  pt-3 mt-5" style="padding-top:20px;border:2px solid #284b63;">
 <div class="container card-body row" id="results">
   {% include 'main/includes/messages.html' %}
   <table id="booking_table ">

@@ -126,7 +126,7 @@ def create_bus(request):
         form = BusOwnerCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('busses-dash')
+            return redirect('buses-dash')
     context = {'form':form}
     return render(request,'admin_dash/create_bus_form.html',context)
 
@@ -137,7 +137,7 @@ def update_bus(request,pk):
         form = UserCreationForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
-            return redirect('busses-dash')
+            return redirect('buses-dash')
     context={'form':form}
     return render(request,'admin_dash/create_bus_form.html',context)
 
@@ -145,7 +145,7 @@ def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)
 	if request.method == "POST":
 		order.delete()
-		return redirect('busses-dash')
+		return redirect('buses-dash')
 
 	context = {'item':order}
 	return render(request, 'admin_dash/delete_bus.html', context)
