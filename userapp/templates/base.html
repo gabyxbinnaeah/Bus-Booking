@@ -1,5 +1,8 @@
 {% load static%}
 {% load bootstrap4%}
+
+{% load sass_tags %}
+
 <!DOCTYPE html>
 <html>
 
@@ -22,6 +25,7 @@
 
   {% block styles %}
   {% bootstrap_css %}
+  <link href="{% static 'index.css' %}" rel="stylesheet" type="text/css" />
   
 
 {% endblock %}
@@ -65,7 +69,9 @@
       });
     });
   </script>
-   
+   {% include 'footer.html'%}
   {%endblock%}
+
+
 </body>
 </html>

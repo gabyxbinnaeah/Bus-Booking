@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Bus,Book,Admin
+from .models import Bus,Book,Admin, Profile
 from userapp.models import Book
 from driverapp.models import Bus
 from django import forms
@@ -51,3 +51,15 @@ class CreateUserForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ['username', 'email', 'password1', 'password2']
+
+# class UserUpdateForm(forms.ModelForm):
+#     email = forms.EmailField()
+    
+#     class Meta:
+#         model = User
+#         fields = ['username','email']
+        
+# class ProfileUpdateForm(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = ['image','bio']
