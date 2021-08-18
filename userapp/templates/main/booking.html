@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+{%load bootstrap4%}
+{%load static%}
+{%block content%}
+
+
+
+{% load crispy_forms_tags %}
+
+
+<div class="container pb-5">
+    <div class="row pt-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="content-section card">
+                <div class="card-body d-flex justify-content-center">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            <legend class="border-bottom mb-4 card-title">Please Pick seat Number and fill The form
+                            </legend>
+                            <div class="m-3"> {{form|crispy}}</div>
+
+
+                        </fieldset>
+                        <div class="form-group  " style="margin-left: 4%;">
+                            <a href="{% url 'confirm_booking'%}">
+                                <input type='submit' class="btn btn-info" value='Book'>
+
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load bootstrap4%}
+{%block content%}
+<div class="container mt-4">
+    <div class="col-12" >
+        <div class="container" style="position: relative; width: 500px; margin-top: 100px;">
+            <div class="card">
+                <div class="card-header text-center"><h4>Key In Registered Number and Total Charges</h4></div>
+                <hr>
+                <div class="card-body text-center" style="background-color: #f5efef;">
+
+                    <form action="{%url 'faredetails'%}" method="POST" >
+                        {% csrf_token%}
+                        <div class="form_control">
+                            <label for="phone_number">Phone Number</label>
+                            <input type="number" name="phone_number" id="phone_number" placeholder="format 07XXXXXXXX">
+                        </div>
+                        <div class="form_control">
+                            <label for="fare">Total Fare</label>
+                            <input type="number" name="fare" id="fare">
+                        </div>
+    
+                        <button type="submit" name="fare_details">Submit</button>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <p>Sent!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+

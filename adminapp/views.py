@@ -1,24 +1,24 @@
 from django.shortcuts import render,redirect
 from userapp.models import Book
 from driverapp.models import Bus
-from .forms import UserCreationForm,BusOwnerCreationForm
-
-# Create your views here.
-from django.shortcuts import render,redirect
+from .forms import CreatePasForm,BusOwnerCreationForm
+from django.core.exceptions import ObjectDoesNotExist
+from django.http.response import Http404
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Bus,Book,Admin 
+from .models import Admin 
 from django.shortcuts import get_object_or_404
-
+from userapp.decorators import unauthenticated,allowed_users
+from .filter import OrderFilterPassenger, OrderFilter
 
 # Create your views here.
 
 def registerPage(request):
 	if request.user.is_authenticated:
-		return redirect('admin')
+		return redirect('passengers-dash')
 	else:
 		form = CreateUserForm()
 		if request.method == 'POST':
@@ -28,7 +28,7 @@ def registerPage(request):
 				user = form.cleaned_data.get('username')
 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('adminlogin')
+				return redirect('superapplogin')
 			
 
 		context = {'form':form}
@@ -38,7 +38,7 @@ def registerPage(request):
 
 def loginPage(request):
 	if request.user.is_authenticated:
-		return redirect('admin')
+		return redirect('passengers-dash')
 	else:
 		if request.method == 'POST':
 			username = request.POST.get('username')
@@ -48,7 +48,7 @@ def loginPage(request):
 
 			if user is not None:
 				login(request, user)
-				return redirect('admin')
+				return redirect('passengers-dash')
 			else:
 				messages.info(request, 'Username OR password is incorrect')
 
@@ -57,36 +57,42 @@ def loginPage(request):
 
 def logoutUser(request):
 	logout(request)
-	return redirect('adminlogin')
+	return redirect('superapplogin')
 
-@login_required(login_url='adminlogin') 
-def admin(request):
-    return render(request, 'adminapp/index.html') 
+# @login_required(login_url='superapplogin') 
+# def admin(request):
+#     return render(request, 'adminapp/index.html') 
 
-@login_required(login_url='adminlogin') 
+
 def contact(request):
 	return render(request, 'adminapp/contact.html')
 
-@login_required(login_url='adminlogin')
+@allowed_users(allowed_roles=['admin'])
 def index(request):
+
     bus = Bus.objects.all()
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilterPassenger(request.GET,queryset=book)
+    book = myFilter.qs
+    return render(request, 'admin_dash/passengers.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
+@allowed_users(allowed_roles=['admin'])
 def busses(request):
     bus = Bus.objects.all()
     book= Book.objects.all()
     total_customers = book.count()
     total_busses = bus.count()
-    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers})
+    myFilter = OrderFilter(request.GET,queryset=bus)
+    bus = myFilter.qs
+    return render(request, 'admin_dash/busses.html',{'book':book[::-1],"bus":bus[::-1],'total_busses':total_busses,'total_customers':total_customers,'myFilter':myFilter})
 
 
 def create_pass(request):
-    form = UserCreationForm()
+    form = CreatePasForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CreatePasForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('passengers-dash')
@@ -95,9 +101,9 @@ def create_pass(request):
 
 def update_pass(request,pk):
     order = Book.objects.get(id=pk)
-    form = UserCreationForm(instance=order)
+    form = CreatePasForm(instance=order)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,instance=order)
+        form = CreatePasForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
             return redirect('passengers-dash')
@@ -125,15 +131,15 @@ def create_bus(request):
     return render(request,'admin_dash/create_bus_form.html',context)
 
 def update_bus(request,pk):
-    bus = Bus.objects.get(id=pk)
-    form = BusOwnerCreationForm(instance=bus)
+    order = Bus.objects.get(id=pk)
+    form = BusOwnerCreationForm(instance=order)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,instance=bus)
+        form = UserCreationForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
             return redirect('busses-dash')
     context={'form':form}
-    return render(request,'admin_dash/create_bus_form.html'.context)
+    return render(request,'admin_dash/create_bus_form.html',context)
 
 def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)
@@ -145,15 +151,27 @@ def delete_bus(request, pk):
 	return render(request, 'admin_dash/delete_bus.html', context)
 
 def passenger(request,pk_test):
-    passenger = Book.objects.get(id=pk_test)
-    orders = passenger.order_set.all()
-    order_count = orders.count()
-    context={'customer':passenger,"orders":orders,"order_count":order_count}
-    return render(request,'admin_dash/passenger.html', context)
+    try:
+        passenger = Book.objects.get(id=pk_test)
+    except ObjectDoesNotExist:
+        raise Http404()
+    
+    context={'passenger':passenger}
+    return render(request,'admin_dash/individual_pass.html', context)
 
 def driver(request,pk_test):
-    driver = Bus.objects.get(id=pk_test)
-    orders = driver.order_set.all()
-    order_count = orders.count()
-    context={'customer':driver,"orders":orders,"order_count":order_count}
-    return render(request,'admin_dash/driver.html', context)
+    try:
+        driver = Bus.objects.get(id=pk_test)
+    except ObjectDoesNotExist:
+        raise Http404()
+    
+    context={'bus':driver}
+    return render(request,'admin_dash/individual_driver.html',context)
+
+def driver_details(request):
+    bus = Bus.objects.all()
+    return render(request,'admin_dash/driver.html',{"buss":bus[::-1]})
+
+def driver_route(request):
+    route = Bus.objects.all()
+    return render(request,'admin_dash/route.html',{'route':route})

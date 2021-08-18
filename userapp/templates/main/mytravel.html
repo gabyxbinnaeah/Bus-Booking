@@ -1,0 +1,66 @@
+{%extends 'base.html'%}
+{% block content %}
+{{block.super}}
+
+ 
+
+<div class="container">
+  <!-- {% for travel in mytravel%} -->
+  <div class="row">
+    <div class="col-md-10 card">
+    <table class="table" style="border: 1px solid grey; position: relative;">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fare </th>
+            <th scope="col">Seat No(s)</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for travel in mytravel%}
+          <tr >
+            <th scope="row">{{travel.id}}</th>
+            <td>{{travel.name}}</td>
+            <td>{{travel.email}}</td>
+            <td>{{travel.fare}}</td>
+            <td>{{travel.seat_no}}</td>
+            <td><a href="{% url 'update' travel.id %}" class="btn btn-info ml-4">Update</a></td>
+            <td><a href="{% url 'delete_booking' travel.id %}" class="btn btn-danger">Delete</a></td>
+    
+          </tr>
+          {% endfor%}
+      
+        </tbody>
+    </table>
+   </div>
+    
+    <!-- <div class="col-md-6">
+     
+      <div class="card" style="width: 25rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Full Name:{{travel.name}}</li>
+          <li class="list-group-item">Email:{{travel.email}}</li>
+          <li class="list-group-item">Fare per seat:{{travel.fare}}</li>
+          <li class="list-group-item">Seat No(s):{{travel.seat_no}}</li>
+      
+        </ul>
+        <span>
+          <a href="{% url 'update' travel.id %}" class="btn btn-info ml-4">Update</a>
+      
+          <a href="{% url 'delete_booking' travel.id %}" class="btn btn-danger">Delete</a>
+      
+        </span>
+       
+      </div>
+      
+    </div> -->
+  </div>
+  <!-- {% endfor %} -->
+</div>
+
+
+{% endblock %}
