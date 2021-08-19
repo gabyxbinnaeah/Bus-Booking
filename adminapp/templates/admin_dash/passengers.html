@@ -1,0 +1,95 @@
+{%  extends 'admin_dash/base.html' %}
+{% load static %}
+{% block content %}
+
+            <!-- body -->
+			<div class="row">
+	
+				<div class="col-md-12 ">
+					<div class="card">
+						<div class="card-body">
+							<form method="get" class="d-flex d-flex justify-content-center " >
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-8"><label for="exampleInputPassword1">Passenger Name :</label></div>
+												<div class="col-md-4">{{myFilter.form.name}}</div>
+											</div>
+											
+										</div>
+									</div>
+									<div class="col-md-2">
+										
+									</div>
+									<div class="col-md-1">
+										
+									</div>
+									<div class="col-md-3">
+								    <button class="btn btn-info"><i class="fas fa-search" aria-hidden="true"></i></button>		
+										<!-- <button class="btn btn-info p-1 m-1" type="submit">Search</button> -->
+									</div>
+								</div>
+								
+								
+								<!-- <div class="form-group">
+									<label for="exampleInputPassword1">Source :</label>
+									{{myFilter.form.source}}
+								</div>
+								<div class="form-group">
+									<label for="exampleInputPassword1">Destination :</label>
+									{{myFilter.form.destination}}
+								</div> -->
+
+								<!-- <div class=""style="font-size:30px">{{myFilter.form.name}}</div>
+								<div class=""style="font-size:30px">{{myFilter.form.source}}</div>
+								<div class=""style="font-size:30px">{{myFilter.form.destination}}</div> -->
+							    
+						    </form>
+						</div>
+					</div>
+					<h5 class="text-center pt-3">Passengers:</h5>
+					<hr>
+					<div class="card card-body">
+			            <div class="row" style="padding:20px">
+							
+							<div class="col-md-4">
+								<a href="{% url 'create_order_pass'%}" class="btn btn-info btn-lg">Create Passenger</a>
+							</div>
+							<div class="col-md-2"></div>
+							<div class="col-md-6"></div>
+						</div>
+						
+						<table class="table table-sm">
+							<tr>
+								<th></th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Date</th>
+								<th>Time</th>
+							</tr>
+			
+							{% for customer in book %}
+							<tr>
+								<td><a class="btn btn-sm btn-info" href="{% url 'passenger' customer.id %}">View</a></td>
+								<td>{{customer.name}}</td>
+								<td>{{customer.email}}</td>
+								<td> {{customer.dest}} </td> 
+								<!-- <td> {{customer.seat_no}} </td> --> 
+								<td> {{customer.date}} </td>
+								<td> {{customer.time}} </td>
+								<td><a class="btn btn-sm btn-info" href="{% url 'update_order_pass' customer.id %}">Update</a></td>
+								<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order_pass' customer.id %}">Delete</a></td>
+			
+							</tr>
+							{% endfor %}
+			
+						</table>
+					</div>
+				</div>
+			</div>
+           
+            
+        </div>
+    </div>
+{%endblock%}

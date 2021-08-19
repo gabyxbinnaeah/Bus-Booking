@@ -1,10 +1,33 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, User
+
 
 # Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    image=models.ImageField('profile-photo',null=True)
+    bio=models.TextField(null=True)
+    
+    
+    def _str_(self):
+        return f'{self.user.username} Profile'
+
 class Admin(models.Model):
     name = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     email = models.EmailField()
+
+    def save_admin(self):
+        self.save()
+
+    def delete_admin(self):
+        self.delete()
+    prof_ref = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='projects', null=True)
+    
+    @classmethod
+    def update_admin(self):
+        admin=Admin.objects.get_or_create()
+        return admin
     
     def __str__(self):
         return self.email  
@@ -19,6 +42,24 @@ class Bus(models.Model):
     fare = models.CharField(null=True, max_length=6)
     date = models.DateField()
     time = models.TimeField()
+
+    
+
+    def save_bus(self):
+        self.save()
+
+    def delete_bus(self):
+        self.delete()
+    
+    @classmethod
+    def update_bus(self):
+        bus=Bus.objects.get_or_create()
+        return bus
+
+    @classmethod
+    def bus_details(cls):
+        bus_details_list=cls.objects.all()
+        return bus_details_list 
 
     def __str__(self):
         return self.bus_name
@@ -45,4 +86,15 @@ class Book(models.Model):
 
     def __str__(self):
         return self.email
+
+    def save_booking(self):
+        self.save()
+
+    def delete_booking(self):
+        self.delete()
+
+    @classmethod
+    def update_booking(self):
+        book=Book.objects.get_or_create()
+        return book
 
