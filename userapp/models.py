@@ -34,6 +34,15 @@ SEAT_OPTIONS = (
             (25, "25"),
         )
 
+class User(User):
+    is_verified = models.BooleanField(default=False,)
+    #other columns go here
+    class Types(models.TextChoices):
+        """User types"""
+        DRIVER = "DRIVER", "Driver"
+        USER = "USER", "User"
+        ADMIN = "ADMIN", "Admin"
+    type = models.CharField(("Type"), max_length=50, choices=Types.choices, default=User)
 
 
 class Book(models.Model):

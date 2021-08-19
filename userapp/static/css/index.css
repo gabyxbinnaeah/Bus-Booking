@@ -13,22 +13,19 @@ body {
 .nav {
     list-style: none;
     float: right !important;
-    margin-right: 5%;
-}
-
-.nav>li {
-    font-family: 'Arvo', serif;
-    font-weight: 600;
-    letter-spacing: 5px;
+    padding-right: 5%;
 }
 
 .nav>li>a {
+    font-family: 'Acme', serif;
+    font-weight: 600;
+    letter-spacing: 5px;
     color: black;
 }
 
 .landing-nav {
     width: 100%;
-    margin-left: 5%;
+    padding-left: 5%;
 }
 
 .sign:hover {
@@ -42,7 +39,6 @@ body {
 .sign>a:hover {
     text-decoration: none;
 }
-
 
 .form {
     margin-top: 5%;
@@ -71,7 +67,6 @@ table {
 }
 
 .book_button {
-    background-color: green;
     color: white;
     font-weight: bold;
     width: 100%;

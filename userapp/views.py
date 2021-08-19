@@ -46,6 +46,7 @@ def booking(request):
         form = SeatsForm(request.POST)
         if form.is_valid():
             seat = form.cleaned_data.get('seat_no')
+            seat.fields['status'].widget.attrs['disabled'] = True
             form.save()
             return HttpResponseRedirect(self.request.path_info)
     else:
@@ -72,7 +73,8 @@ def registeruser(request):
         if form.is_valid():
             user = form.save()
             
-            group=Group.objects.get('user')
+            group=Group.objects.get(name='user')
+
             user.groups.add(group)
             
             messages.success(request, 'Account Created Successfully!. Check out our Email later :)')

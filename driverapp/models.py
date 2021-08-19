@@ -27,6 +27,7 @@ class Bus(models.Model):
     @classmethod
     def search_buses(cls, source, destination):
         return cls.objects.filter(source__icontains=source , destination__icontains=destination).all()
+    
     def bus_details(cls):
         bus_details_list=cls.objects.all()
         return bus_details_list 

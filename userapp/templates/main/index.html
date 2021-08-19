@@ -5,22 +5,9 @@
 
 {%block content%}
 <div class="body">
-  
-  <div class="landing-nav">
-    <div>
-      <h2>BUS TRAVELS</h2>
-    </div>
-    <div>
-      <ul class="nav">
-        <li class="btn btn-lg"><a href="">HOME</a></li>
-        <li class="btn btn-lg sign"><a href="{%url 'register'%}">SIGNUP</a></li>
-        <li class="btn btn-lg sign"><a href="{%url 'loginpage'%}">LOGIN</a></li>
-        <li class="btn btn-lg"><a href="">{{user}}</a></li>
-      </ul>
-    </div>
-  </div>
+
   <div class="container">
-    <div class="row">
+    <div class="row" style="clear:both;">
       <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6  bus-search-form">
         <form action="" method="POST" class="form">
           {% csrf_token %}
@@ -53,7 +40,8 @@
       <td>{{bus.destination}}</td>
       <td>sh.{{bus.fare}}</td>
       <td>{{bus.date}}</td>
-      <td><a href="{%url 'booking' bus.id %}"><button class="btn btn-md book_button float-right">BOOK NOW</button></a>
+      <td><a href="{%url 'booking' bus.id %}"><button class="btn btn-md book_button float-right"
+            style="background-color:yellow;">BOOK NOW</button></a>
       </td>
     </tr>
     {%endfor%}
