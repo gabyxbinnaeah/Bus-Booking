@@ -12,26 +12,43 @@ from django.contrib.auth.decorators import login_required
 from .models import Driver
 from django.shortcuts import get_object_or_404
 from userapp.decorators import unauthenticated,allowed_users
+from django.contrib.auth.models import Group
 
 # Create your views here.
 
-def registerDriver(request):
-	if request.user.is_authenticated:
-		return redirect('driver')
-	else:
-		form = CreateUserForm()
-		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
-			if form.is_valid():
-				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, 'Account was created for ' + user)
+# def registerDriver(request):
+# 	if request.user.is_authenticated:
+# 		return redirect('driver')
+# 	else:
+# 		form = CreateUserForm()
+# 		if request.method == 'POST':
+# 			form = CreateUserForm(request.POST)
+# 			if form.is_valid():
+# 				form.save()
+# 				user = form.cleaned_data.get('username')
+# 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('driverlogin')
+# 				return redirect('driverlogin')
 			
 
-		context = {'form':form}
-		return render(request, 'registration/register.html', context)
+# 		context = {'form':form}
+# 		return render(request, 'register_driver/register.html', context)
+
+def registerDriver(request):
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            driver=form.save()
+            group=Group.objects.get(name='driver')
+            driver.groups.add(group)
+            messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
+
+            return redirect('driverlogin')
+    else:
+        form = CreateUserForm
+    context = {'form':form}
+
+    return render(request, 'register_driver/register.html', context)
 
 
 
@@ -55,7 +72,7 @@ def loginPage(request):
 				messages.info(request, 'Username OR password is incorrect')
 
 		context = {}
-		return render(request, 'registration/login.html', context)
+		return render(request, 'register_driver/login.html', context)
 
 def logoutDriver(request):
 	logout(request)
@@ -130,12 +147,14 @@ def update_bus(request,pk):
     bus = Bus.objects.get(id=pk)
     form = BusOwnerCreationForm(instance=bus)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,instance=bus)
+        form = BusOwnerCreationForm(request.POST,instance=bus)
         if form.is_valid():
             form.save()
             return redirect('busses-dash')
     context={'form':form}
     return render(request,'driver_dash/create_bus_form.html',context)
+
+
 @allowed_users(allowed_roles=['driver','admin'])
 def delete_bus(request, pk):
 	order = Bus.objects.get(id=pk)

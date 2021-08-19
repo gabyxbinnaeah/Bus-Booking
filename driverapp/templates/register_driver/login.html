@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Login Form</title>
     <meta charset="UTF-8">
@@ -171,7 +170,7 @@
         <div class="form-container log-in-container">
             <form action="" method="POST">
                 {%csrf_token%}
-                <h1>Login</h1>
+                <h1>Login As Driver</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fa fa-facebook fa-2x"></i></a>
                     <a href="#" class="social"><i class="fab fa fa-twitter fa-2x"></i></a>
@@ -193,8 +192,8 @@
 
                     <div class="mt-4">
                         <div class="d-flex justify-content-center links">
-                            Don't have an account? <a href="{% url 'superapplogin' %}" class="ml-2"
-                                style="color: blue;">Sign Up</a>
+                            Don't have an account? <a href="{% url 'driverregister' %}" class="ml-2"
+                                style="color: blue;">Create Driver</a>
                         </div>
 
                     </div>

@@ -25,7 +25,7 @@ MESSAGE_TAGS = {
         messages.SUCCESS: 'alert-success',
         messages.WARNING: 'alert-warning',
         messages.ERROR: 'alert-danger',
- }
+}
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -35,6 +35,7 @@ MODE=config("MODE", default="dev")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
@@ -179,8 +180,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/' 
+# LOGOUT_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/' 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -206,8 +207,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # config/settings.py
-LOGIN_REDIRECT_URL = ''
-LOGOUT_REDIRECT_URL = 'loginpage'
+# LOGIN_REDIRECT_URL = ''
+# LOGOUT_REDIRECT_URL = 'loginpage'
 
 STATICFILES_DIRS = [
      os.path.join(BASE_DIR, "static"),
@@ -217,3 +218,12 @@ STATICFILES_DIRS = [
 # AUTH_USER_MODEL='adminapp.User'
 SASS_PROCESSOR_ROOT = STATIC_ROOT
 
+
+cloudinary.config( 
+  cloud_name = "dlong0jzl", 
+  api_key = "819463433847993", 
+  api_secret = "gSq3xz88Z2qQtuOWgWumg5k4CVs",
+  secure = True
+)
+
+django_heroku.settings(locals())

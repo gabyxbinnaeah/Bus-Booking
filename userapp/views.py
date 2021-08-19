@@ -30,23 +30,19 @@ today = date.today()
 
 
 # Create your views here.
-def registeruser(request):
+def registeringuser(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user=form.save()
             group=Group.objects.get(name='user')
-            group.user_set.add(user)
-            # user.groups.add(group)
+            user.groups.add(group)
             messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
 
             return redirect('loginpage')
     else:
         form = CreateUserForm
-    context = {
-            
-            'form':form,
-                        }
+    context = {'form':form}
 
     return render(request,'registration/register.html',context)
 
@@ -73,7 +69,7 @@ def loginpage(request):
 
 def logout_page(request):
     logout(request) 
-    return redirect('loginpage')
+    return redirect('index')
 
 
 

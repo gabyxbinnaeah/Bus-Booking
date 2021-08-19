@@ -13,26 +13,43 @@ from .models import Admin
 from django.shortcuts import get_object_or_404
 from userapp.decorators import unauthenticated,allowed_users
 from .filter import OrderFilterPassenger, OrderFilter
-
+from django.contrib.auth.models import Group
 # Create your views here.
 
-def registerPage(request):
-	if request.user.is_authenticated:
-		return redirect('passengers-dash')
-	else:
-		form = CreateUserForm()
-		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
-			if form.is_valid():
-				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, 'Account was created for ' + user)
+# def registerPage(request):
+# 	if request.user.is_authenticated:
+# 		return redirect('passengers-dash')
+# 	else:
+# 		form = CreateUserForm()
+# 		if request.method == 'POST':
+# 			form = CreateUserForm(request.POST)
+# 			if form.is_valid():
+# 				form.save()
+# 				user = form.cleaned_data.get('username')
+# 				messages.success(request, 'Account was created for ' + user)
 
-				return redirect('superapplogin')
+# 				return redirect('superapplogin')
 			
 
-		context = {'form':form}
-		return render(request, 'accounts/register.html', context)
+# 		context = {'form':form}
+# 		return render(request, 'accounts/register.html', context)
+
+def registerAdmin(request):
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            admin=form.save()
+            group=Group.objects.get(name='admin')
+            admin.groups.add(group)
+            messages.success(request, 'Account Created Successfully!. Check out our Email later :)')
+
+            return redirect('superapplogin')
+    else:
+        form = CreateUserForm
+    context = {'form':form}
+
+    return render(request, 'accounts/register.html', context)
+
 
 
 
@@ -134,7 +151,7 @@ def update_bus(request,pk):
     order = Bus.objects.get(id=pk)
     form = BusOwnerCreationForm(instance=order)
     if request.method == 'POST':
-        form = UserCreationForm(request.POST,instance=order)
+        form = BusOwnerCreationForm(request.POST,instance=order)
         if form.is_valid():
             form.save()
             return redirect('buses-dash')
