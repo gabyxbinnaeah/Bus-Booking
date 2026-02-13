@@ -12,7 +12,7 @@ cloudinary==1.22.0
 colorama==0.4.3
 command-not-found==0.3
 confusable-homoglyphs==3.2.0
-cryptography==2.8
+cryptography==46.0.5
 cupshelpers==1.0
 dbus-python==1.2.16
 defer==1.0.6
